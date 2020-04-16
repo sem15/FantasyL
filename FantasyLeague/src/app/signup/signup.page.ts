@@ -13,6 +13,9 @@ export class Signup implements OnInit {
 
   ngOnInit() {
 
+  }
 
+  goBack(){
+    this.router.navigate(['./tabs/login']);
   }
 }
