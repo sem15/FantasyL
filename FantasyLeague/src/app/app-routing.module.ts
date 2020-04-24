@@ -17,6 +17,10 @@ const routes: Routes = [
   {
     path: 'leagueoverview',
     loadChildren: () => import('./leagueoverview/leagueoverview.module').then( m => m.LeagueoverviewPageModule)
+  },
+  {
+    path: 'playerinfo',
+    loadChildren: () => import('./playerinfo/playerinfo.module').then( m => m.PlayerinfoPageModule)
   }
 ];
 @NgModule({

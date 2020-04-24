@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-leagueoverview',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LeagueoverviewPage implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+
+  goBack(){
+    this.router.navigate(['./tabs/leagueList']);
+  }
+
+  draftLobbyTest(){
+    this.router.navigate(['./tabs/draftLobby']);
   }
 
 }
