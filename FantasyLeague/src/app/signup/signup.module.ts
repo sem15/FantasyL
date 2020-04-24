@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Signup } from './signup.page';
-import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
 @NgModule({
   imports: [
@@ -13,7 +12,6 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    ExploreContainerComponentModule,
     RouterModule.forChild([{ path: '', component: Signup }])
   ],
   declarations: [Signup]
