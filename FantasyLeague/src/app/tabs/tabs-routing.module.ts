@@ -29,6 +29,16 @@ const routes: Routes = [
           }
         ]
       },
+      {
+        path: 'createLeague',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../createleague/createleague.module').then(m => m.CreateleaguePageModule)
+          }
+        ]
+      },
       
       {
         path: 'leagueList',
@@ -44,7 +54,7 @@ const routes: Routes = [
         path: '',
         redirectTo: '/tabs/login',
         pathMatch: 'full'
-      }
+      },
     ]
   },
   {

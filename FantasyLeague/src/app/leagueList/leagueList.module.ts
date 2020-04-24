@@ -4,12 +4,15 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { leagueListPage } from './leagueList.page';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild([{ path: '', component: leagueListPage }])
   ],
   declarations: [leagueListPage]

@@ -30,7 +30,8 @@ export class Signup implements OnInit {
       /*
         REGISTER ACCOUNT
       */
-     //this.router.navigate([home page])
+     this.router.navigate(['./tabs/leagueList']);
+
     }
     else {
       console.log("Password does not match");

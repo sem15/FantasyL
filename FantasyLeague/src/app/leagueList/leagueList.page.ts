@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-leagueList',
@@ -7,6 +9,15 @@ import { Component } from '@angular/core';
 })
 export class leagueListPage {
 
-  constructor() {}
+  constructor(private router: Router) {}
+
+
+  createLeague(){
+  	this.router.navigate(['./tabs/createLeague']);
+  }
+
+  logout(){
+    this.router.navigate(['./tabs/login']);
+  }
 
 }
