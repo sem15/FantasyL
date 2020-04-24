@@ -1,19 +1,18 @@
+import { IonicModule } from '@ionic/angular';
+import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-import { IonicModule } from '@ionic/angular';
-
-import { CreateleaguePageRoutingModule } from './createleague-routing.module';
-
 import { CreateleaguePage } from './createleague.page';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CreateleaguePageRoutingModule
+    ReactiveFormsModule,
+    RouterModule.forChild([{ path: '', component: CreateleaguePage }])
   ],
   declarations: [CreateleaguePage]
 })

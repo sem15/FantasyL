@@ -8,6 +8,11 @@ import { Router } from '@angular/router';
 })
 export class Signup implements OnInit {
 
+  user={
+    email:"",
+    password:"",
+    confirmation:""};
+
   constructor(private router: Router) {}
 
 
@@ -17,5 +22,20 @@ export class Signup implements OnInit {
 
   goBack(){
     this.router.navigate(['./tabs/login']);
+  }
+
+  signup(){
+    
+    if (this.user.password == this.user.confirmation){
+      /*
+        REGISTER ACCOUNT
+      */
+     this.router.navigate(['./tabs/leagueList']);
+
+    }
+    else {
+      console.log("Password does not match");
+      
+    }
   }
 }

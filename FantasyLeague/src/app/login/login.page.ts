@@ -26,4 +26,13 @@ ngOnInit() {
   signup(){
   	this.router.navigate(['./tabs/signup']);
   }
+
+  login(){
+    /*if (stuff is right){
+      this.router.navigate([home page])
+    }
+    */
+   console.log("good job");
+   this.router.navigate(['./tabs/leagueList']);
+  }
 }

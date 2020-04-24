@@ -1,0 +1,18 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      League List
+    </ion-title>
+    <ion-button slot="end" (click)="logout()" color = "dark" fill="clear"> 
+      <ion-icon name="exit-outline" color="dark"></ion-icon> Logout
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+ 
+
+  League List Page
+
+  <ion-button class="submit-btn" expand = "block" (click)="createLeague()">Create New League</ion-button>
+</ion-content>
