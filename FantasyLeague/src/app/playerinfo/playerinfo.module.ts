@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
-import { DraftlobbyPage } from './draftlobby.page';
+import { PlayerinfoPage } from './playerinfo.page';
 
 @NgModule({
   imports: [
@@ -12,8 +12,8 @@ import { DraftlobbyPage } from './draftlobby.page';
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    RouterModule.forChild([{ path: '', component: DraftlobbyPage }])
+    RouterModule.forChild([{ path: '', component: PlayerinfoPage }])
   ],
-  declarations: [DraftlobbyPage]
+  declarations: [PlayerinfoPage]
 })
-export class DraftlobbyPageModule {}
+export class PlayerinfoPageModule {}

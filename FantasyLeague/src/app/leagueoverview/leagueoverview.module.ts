@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
-
-import { LeagueoverviewPageRoutingModule } from './leagueoverview-routing.module';
-
+import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 import { LeagueoverviewPage } from './leagueoverview.page';
 
 @NgModule({
@@ -13,7 +11,8 @@ import { LeagueoverviewPage } from './leagueoverview.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    LeagueoverviewPageRoutingModule
+    ReactiveFormsModule,
+    RouterModule.forChild([{ path: '', component: LeagueoverviewPage }])
   ],
   declarations: [LeagueoverviewPage]
 })
