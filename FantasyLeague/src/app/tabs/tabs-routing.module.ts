@@ -8,45 +8,87 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'tab1',
+        path: 'login',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../tab1/tab1.module').then(m => m.Tab1PageModule)
+              import('../login/login.module').then(m => m.LoginModule)
+          }
+
+
+        ]
+      },
+      {
+        path: 'signup',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../signup/signup.module').then(m => m.SignupModule)
           }
         ]
       },
       {
-        path: 'tab2',
+        path: 'createLeague',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../tab2/tab2.module').then(m => m.Tab2PageModule)
+              import('../createleague/createleague.module').then(m => m.CreateleaguePageModule)
           }
         ]
       },
       {
-        path: 'tab3',
+        path: 'leagueOverview',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../tab3/tab3.module').then(m => m.Tab3PageModule)
+              import('../leagueoverview/leagueoverview.module').then(m => m.LeagueoverviewPageModule)
+          }
+        ]
+      },
+      {
+        path: 'draftLobby',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../draftlobby/draftlobby.module').then(m => m.DraftlobbyPageModule)
+          }
+        ]
+      },
+      {
+        path: 'leagueList',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../leagueList/leagueList.module').then(m => m.leagueListPageModule)
+          }
+        ]
+      },
+      {
+        path: 'playerInfo',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../playerinfo/playerinfo.module').then(m => m.PlayerinfoPageModule)
           }
         ]
       },
       {
         path: '',
-        redirectTo: '/tabs/tab1',
+        redirectTo: '/tabs/login',
         pathMatch: 'full'
-      }
+      },
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/tab1',
+    redirectTo: '/tabs/login',
     pathMatch: 'full'
   }
 ];

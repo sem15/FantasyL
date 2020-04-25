@@ -1,0 +1,35 @@
+<ion-header [translucent]="true">
+  <ion-toolbar >
+    
+    <ion-title>
+      Login
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+
+  <form [formGroup]="new_item_form" (submit)="login(new_item_form.value)">
+    <ion-item>
+      <ion-label color="primary" position="floating">Email</ion-label>
+      <ion-input type="text" formControlName="email" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="floating">Password</ion-label>
+      <ion-input type="text" formControlName="password" required></ion-input>
+    </ion-item>
+
+    <ion-button class="submit-btn" expand="block" type="submit" [disabled]="!new_item_form.valid">Login</ion-button>
+  </form>
+  
+    <ion-item>
+      <ion-grid>
+        <ion-button class="submit-btn" (click)="signup()">Sign-up</ion-button>
+        <ion-button class="submit-btn" (click)="loginGoogle()">Google Login</ion-button>
+        
+      </ion-grid>
+    </ion-item>
+
+  
+  </ion-content>

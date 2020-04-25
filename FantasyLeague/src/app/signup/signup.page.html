@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-button slot="start" (click)="goBack()" fill="clear">
+      <ion-icon name="arrow-back" color="dark"></ion-icon>
+    </ion-button>
+    <ion-title>
+      Sign-up
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-item>
+    <ion-label color="primary" position="floating">Email</ion-label>
+    <ion-input type="text"  [(ngModel)]="user.email" required></ion-input> 
+  </ion-item>
+  <ion-item>
+    <ion-label color="primary" position="floating">Password</ion-label>
+    <ion-input type="text" [(ngModel)]="user.password" required></ion-input> 
+  </ion-item>
+  <ion-item>
+    <ion-label color="primary" position="floating">Confirm Password</ion-label>
+    <ion-input type="text" [(ngModel)]="user.confirmation" required></ion-input> 
+  </ion-item>
+
+
+  <ion-button class="submit-btn" expand="block" type="submit" (click)="signup()">Sign up</ion-button>
+
+</ion-content>
