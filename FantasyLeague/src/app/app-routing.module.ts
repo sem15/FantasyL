@@ -21,6 +21,18 @@ const routes: Routes = [
   {
     path: 'playerinfo',
     loadChildren: () => import('./playerinfo/playerinfo.module').then( m => m.PlayerinfoPageModule)
+  },
+  {
+    path: 'roster-overview',
+    loadChildren: () => import('./roster-overview/roster-overview.module').then( m => m.RosterOverviewPageModule)
+  },
+  {
+    path: 'invite',
+    loadChildren: () => import('./invite/invite.module').then( m => m.InvitePageModule)
+  },
+  {
+    path: 'trade',
+    loadChildren: () => import('./trade/trade.module').then( m => m.TradePageModule)
   }
 ];
 @NgModule({
