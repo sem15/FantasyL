@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
+import {RosterService} from '../roster.service';
 
 @Component({
   selector: 'app-leagueoverview',
@@ -8,8 +9,17 @@ import { Router } from '@angular/router';
 })
 export class LeagueoverviewPage implements OnInit {
 
-  constructor(private router: Router) { }
-
+  roster=[]
+  constructor(
+    private router: Router,
+    private rosterService: RosterService
+  ) {
+    this.roster=this.rosterService.roster;
+    this.rosterService.getObservable().subscribe((data) =>{
+      this.roster=this.rosterService.roster;
+    });
+    console.log(this.roster);
+   }
   ngOnInit() {
   }
 
@@ -19,6 +29,14 @@ export class LeagueoverviewPage implements OnInit {
 
   draftLobbyTest(){
     this.router.navigate(['./tabs/draftLobby']);
+  }
+
+  goToRoster(rost){
+    console.log(rost);
+    this.rosterService.param=rost;
+    console.log(this.rosterService.param);
+  	this.router.navigate(["/roster-overview"]);
+
   }
 
 }

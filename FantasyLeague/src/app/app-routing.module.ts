@@ -33,6 +33,10 @@ const routes: Routes = [
   {
     path: 'trade',
     loadChildren: () => import('./trade/trade.module').then( m => m.TradePageModule)
+  },
+  {
+    path: 'editroster',
+    loadChildren: () => import('./editroster/editroster.module').then( m => m.EditrosterPageModule)
   }
 ];
 @NgModule({
