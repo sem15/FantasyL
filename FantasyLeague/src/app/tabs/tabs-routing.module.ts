@@ -16,7 +16,7 @@ const routes: Routes = [
               import('../login/login.module').then(m => m.LoginModule)
           }
 
-          
+
         ]
       },
       {
@@ -39,7 +39,26 @@ const routes: Routes = [
           }
         ]
       },
-      
+      {
+        path: 'leagueOverview',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../leagueoverview/leagueoverview.module').then(m => m.LeagueoverviewPageModule)
+          }
+        ]
+      },
+      {
+        path: 'draftLobby',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../draftlobby/draftlobby.module').then(m => m.DraftlobbyPageModule)
+          }
+        ]
+      },
       {
         path: 'leagueList',
         children: [
@@ -47,6 +66,49 @@ const routes: Routes = [
             path: '',
             loadChildren: () =>
               import('../leagueList/leagueList.module').then(m => m.leagueListPageModule)
+          }
+        ]
+      },
+      {
+        path: 'playerInfo',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../playerinfo/playerinfo.module').then(m => m.PlayerinfoPageModule)
+          }
+        ]
+      },
+      {
+        path: 'trade',
+        children: [
+          {
+            path: '',
+            loadChildren: () => 
+            import('../trade/trade.module').then( m => m.TradePageModule)
+
+          }
+        ]
+      },
+      {
+        path: 'roster-overview',
+        children: [
+          {
+            path: '',
+            loadChildren: () => 
+            import('../roster-overview/roster-overview.module').then( m => m.RosterOverviewPageModule)
+
+          }
+        ]
+      },
+      {
+        path: 'invite',
+        children: [
+          {
+            path: '',
+            loadChildren: () => 
+            import('../invite/invite.module').then( m => m.InvitePageModule)
+
           }
         ]
       },
