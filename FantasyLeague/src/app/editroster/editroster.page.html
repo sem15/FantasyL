@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Edit Status</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="edit_item_form" (submit)="updateStatus(edit_item_form.value)">
+
+  <ion-item>
+    <ion-label>Status</ion-label>
+    <ion-select formControlName="status" required okText="Okay" cancelText="Dismiss">
+      <ion-select-option value="Active">Active</ion-select-option>
+      <ion-select-option value="Bench">Bench</ion-select-option>
+    </ion-select>
+  </ion-item>
+      <ion-button class="submit-btn" expand="block" type="submit" >Update</ion-button>
+    </form>
+  </ion-content>
+

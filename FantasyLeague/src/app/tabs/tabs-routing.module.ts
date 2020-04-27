@@ -80,6 +80,39 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'trade',
+        children: [
+          {
+            path: '',
+            loadChildren: () => 
+            import('../trade/trade.module').then( m => m.TradePageModule)
+
+          }
+        ]
+      },
+      {
+        path: 'roster-overview',
+        children: [
+          {
+            path: '',
+            loadChildren: () => 
+            import('../roster-overview/roster-overview.module').then( m => m.RosterOverviewPageModule)
+
+          }
+        ]
+      },
+      {
+        path: 'invite',
+        children: [
+          {
+            path: '',
+            loadChildren: () => 
+            import('../invite/invite.module').then( m => m.InvitePageModule)
+
+          }
+        ]
+      },
+      {
         path: '',
         redirectTo: '/tabs/login',
         pathMatch: 'full'
