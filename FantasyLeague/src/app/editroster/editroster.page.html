@@ -9,10 +9,13 @@
 
 <ion-content padding>
   <form [formGroup]="edit_item_form" (submit)="updateStatus(edit_item_form.value)">
-
+    <ion-item>
+      <ion-label color="primary" position="floating">Team Name</ion-label>
+      <ion-input type="text" formControlName="Team" required></ion-input>
+    </ion-item>
   <ion-item>
     <ion-label>Status</ion-label>
-    <ion-select formControlName="status" required okText="Okay" cancelText="Dismiss">
+    <ion-select formControlName="Status" required okText="Okay" cancelText="Dismiss">
       <ion-select-option value="Active">Active</ion-select-option>
       <ion-select-option value="Bench">Bench</ion-select-option>
     </ion-select>
