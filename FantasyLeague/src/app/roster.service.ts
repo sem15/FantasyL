@@ -13,7 +13,7 @@ export class RosterService {
   id:any;
   private eventSubject=new Subject<any>();
   db=firebase.firestore();
-  players:Array<any>=[];
+  players:any;
   roster:Array<any>=[];
 
   //event notification
@@ -35,8 +35,9 @@ getObservable(): Subject<any> {
              self.roster = [];
              querySnapshot.forEach(function(doc) {
                  var roster = doc.data();
-                 self.roster.push({invCode:roster.invCode,players:roster.players,
+                 self.roster.push({Team:roster.Team,invCode:roster.invCode,players:roster.players,
                   uid:roster.uid,id:doc.id})
+                  self.players=roster.players;
              });
  
              self.publishEvent({
@@ -50,15 +51,18 @@ getObservable(): Subject<any> {
 
     refresh(){
       var self=this;
-      if(firebase.auth().currentUser!=null){
-        this.db.collection("roster").where("uid", "==", firebase.auth().currentUser.uid)
-       .onSnapshot(function(querySnapshot) {
+      // if(firebase.auth().currentUser!=null){
+      //   this.db.collection("roster").where("uid", "==", firebase.auth().currentUser.uid)
+      //  .onSnapshot(function(querySnapshot) {
+        this.db.collection("roster").where("uid", "==", "sFXHJKC86RVj9A2Qr7IoXlZbgRR2")
+        .onSnapshot(function(querySnapshot) {
              console.log("roster list changed...........");
              self.roster = [];
              querySnapshot.forEach(function(doc) {
               var roster = doc.data();
-              self.roster.push({invCode:roster.invCode,players:roster.players,
+              self.roster.push({Team:roster.Team,invCode:roster.invCode,players:roster.players,
                uid:roster.uid,id:doc.id})
+               self.players=roster.players;
              });
   
              self.publishEvent({
@@ -68,7 +72,7 @@ getObservable(): Subject<any> {
              console.log("items reloaded");
          } );
       }
-    }
+    //}
 
     getRoster():any{
       var RosterObservable = new Observable(observer => {
