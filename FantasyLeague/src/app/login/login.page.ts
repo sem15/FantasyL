@@ -72,7 +72,7 @@ ngOnInit() {
       var errorCode = error.code;
       var errorMessage = error.message;
       if (errorCode.length == 0){
-        alert("FantasyL has sent (" + item.email + ") a reset password email, if it exists.");
+        alert("FantasyL has sent (" + item.email + ") a reset password email, if it exists. Try to remember this code");
       }
       else {
         alert("Oops! " + errorMessage);
