@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import * as firebase from 'firebase';
 
 
 @Component({
@@ -17,6 +18,7 @@ export class leagueListPage {
   }
 
   logout(){
+    firebase.auth().signOut();   
     this.router.navigate(['./tabs/login']);
   }
 
