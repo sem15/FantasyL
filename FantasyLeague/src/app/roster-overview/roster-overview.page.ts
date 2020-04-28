@@ -17,12 +17,14 @@ export class RosterOverviewPage implements OnInit {
 
   ngOnInit() {
     this.currentroster=this.rosterService.param;
-    console.log(this.currentroster);
     console.log(this.rosterService.param);
   }
 
   updateStatus(players){
     this.rosterService.id=this.currentroster.id;
+    // this.rosterService.players=this.currentroster.players;
+    // console.log("players:"+this.rosterService.players);
+    // console.log("currentrosterplayers:"+this.currentroster.players);
     this.router.navigate(["/editroster",players])
   }
 

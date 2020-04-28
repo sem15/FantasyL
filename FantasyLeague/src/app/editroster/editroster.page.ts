@@ -19,7 +19,8 @@ export class EditrosterPage implements OnInit {
     private router:Router
   	) { 
   		this.edit_item_form = this.formBuilder.group({
-          status: new FormControl("",Validators.required),
+          Team: new FormControl("", Validators.required),
+          Status: new FormControl("",Validators.required),
         });
         console.log("constructor of UpdateItemPage")
   }
@@ -29,19 +30,32 @@ export class EditrosterPage implements OnInit {
     param => {
       this.current_player = param;
       console.log(this.current_player);
-
-      this.edit_item_form.patchValue({status:this.current_player.status});;
+      this.edit_item_form.patchValue({Team:this.rosterService.param.Team});
+      console.log(this.rosterService.param);
+      this.edit_item_form.patchValue({Status:this.current_player.Status});
 
   })
 }
 
 updateStatus(value){
-
+let playerlist=this.rosterService.players;
+console.log(playerlist);
+let index=playerlist.map(function(e){
+  return e.pid;
+}).indexOf(this.current_player.pid);
+console.log("index:"+index);
+if(index!=-1)
+{
+  console.log(playerlist);
+  console.log(playerlist.Status);
+  playerlist[index].Status=value.Status;
+}
   let newValues = {
     id:this.rosterService.id,
-    status: value.status,
-    pid:this.current_player.pid
+    Team:value.Team,
+    players:playerlist
   }
+  console.log("PlayerList:"+playerlist);
   //if(firebase.auth().currentUser.uid===this.current_player.uid)
   //{
     this.rosterService.updateStatus(newValues);
@@ -56,7 +70,7 @@ updateStatus(value){
 }
 
 goBack(){
-  this.router.navigate(['/tabs/roster-overview']);
+  this.router.navigate(['/tabs/leagueOverview']);
 }
 
 }
