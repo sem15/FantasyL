@@ -28,8 +28,8 @@ getObservable(): Subject<any> {
     ) { 
       var self=this;
 
-      //if(firebase.auth().currentUser!=null){
-        this.db.collection("roster").where("uid", "==", "sFXHJKC86RVj9A2Qr7IoXlZbgRR2")
+      if(firebase.auth().currentUser!=null){
+        this.db.collection("roster").where("uid", "==", firebase.auth().currentUser.uid)
        .onSnapshot(function(querySnapshot) {
              console.log("roster list changed...........");
              self.roster = [];
@@ -46,16 +46,16 @@ getObservable(): Subject<any> {
  
              console.log("items reloaded");
          } );
-      //}
+      }
     }
 
     refresh(){
       var self=this;
-      // if(firebase.auth().currentUser!=null){
-      //   this.db.collection("roster").where("uid", "==", firebase.auth().currentUser.uid)
-      //  .onSnapshot(function(querySnapshot) {
-        this.db.collection("roster").where("uid", "==", "sFXHJKC86RVj9A2Qr7IoXlZbgRR2")
-        .onSnapshot(function(querySnapshot) {
+      if(firebase.auth().currentUser!=null){
+        this.db.collection("roster").where("uid", "==", firebase.auth().currentUser.uid)
+       .onSnapshot(function(querySnapshot) {
+        // this.db.collection("roster").where("uid", "==", "sFXHJKC86RVj9A2Qr7IoXlZbgRR2")
+        // .onSnapshot(function(querySnapshot) {
              console.log("roster list changed...........");
              self.roster = [];
              querySnapshot.forEach(function(doc) {
@@ -72,7 +72,8 @@ getObservable(): Subject<any> {
              console.log("items reloaded");
          } );
       }
-    //}
+    }
+    
 
     getRoster():any{
       var RosterObservable = new Observable(observer => {
