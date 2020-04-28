@@ -66,7 +66,18 @@ ngOnInit() {
   }
 
   forgotPassword(item){
-    alert(item.email);
+    //if email is valid
+    var db = firebase.firestore();
+    firebase.auth().sendPasswordResetEmail(item.email).catch(function(error) {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      if (errorCode.length == 0){
+        alert("FantasyL has sent (" + item.email + ") a reset password email, if it exists.");
+      }
+      else {
+        alert("Oops! " + errorMessage);
+      }
+    });
   }
   loginGoogle(){  //not sure whats wrong with this... its exactly what works for my hw ~ Steven
     var self=this;
