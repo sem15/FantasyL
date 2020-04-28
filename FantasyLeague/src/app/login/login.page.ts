@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Validators, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import * as firebase from 'Firebase';
+
 
 @Component({
   selector: 'app-login',
@@ -9,6 +11,8 @@ import { Validators, FormBuilder, FormControl, FormGroup } from '@angular/forms'
 })
 export class Login implements OnInit {
   new_item_form: FormGroup;
+  password_form: FormGroup;
+  
 
   constructor(private router: Router,
               public formBuilder: FormBuilder
@@ -21,18 +25,66 @@ ngOnInit() {
     email: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required)
   });
+  this.password_form = this.formBuilder.group({
+    email: new FormControl('', Validators.required)
+  })
+
 }
 
   signup(){
   	this.router.navigate(['./tabs/signup']);
   }
 
-  login(){
-    /*if (stuff is right){
-      this.router.navigate([home page])
+  login(item){
+    console.log(item.email+"   "+item.password)
+    var self = this;
+    var email=item.email;
+    var password=item.password;
+    var check = true;
+    firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log(errorCode);
+      //console.log(errorMessage);
+  
+      if (errorCode.length > 0) {
+              alert(errorCode);
+              check = false;
+      }
+      
+      console.log(error);
     }
-    */
-   console.log("good job");
-   this.router.navigate(['./tabs/leagueList']);
+    ).then(function(user){
+          if(check == true){
+            self.router.navigate(["./tabs/leagueList"]);
+          }
+          else{
+            console.log("errors");
+          }
+    });
   }
+
+  forgotPassword(item){
+    alert(item.email);
+  }
+  loginGoogle(){  //not sure whats wrong with this... its exactly what works for my hw ~ Steven
+    var self=this;
+  		console.log("google login")
+  		// Using a popup.
+		var provider = new firebase.auth.GoogleAuthProvider();
+		provider.addScope('profile');
+		provider.addScope('email');
+		firebase.auth().signInWithPopup(provider).then(function(result) {
+		 // This gives you a Google Access Token.
+		 var token = result.credential.providerId;
+		 // The signed-in user info.
+		 var user = result.user;
+		 console.log(user);
+		 console.log("login succeeded")
+		 self.router.navigate(["/tabs/leagueList"]);
+		});
+  }
+   
+  
 }
