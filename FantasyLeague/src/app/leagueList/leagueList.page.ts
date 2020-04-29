@@ -40,8 +40,9 @@ export class leagueListPage implements OnInit{
     this.router.navigate(["./tabs/leagueOverview", league]);
   }
 
-  verifyCode(item){
-      this.leagueService.joinLeague(item.verificationCode);
+  verifyCode(){
+      this.router.navigate(["./tabs/invite"]);
+     // this.leagueService.joinLeague(item.verificationCode);
      //alert("The code you entered was " + item.verificationCode);
 
   }

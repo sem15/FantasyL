@@ -3,6 +3,7 @@
     <ion-title>Invite Page</ion-title>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -14,10 +15,11 @@
     </ion-item>
 
   <ion-item>
-    <ion-label color="primary" position="floating">invCode</ion-label>
+    <ion-label color="primary" position="floating">Invite Code</ion-label>
     <ion-input type="text" formControlName="invCode" required></ion-input>
   </ion-item>
 
     <ion-button class="submit-btn" expand="block" type="submit" [disabled]="!new_item_form.valid">Join</ion-button>
   </form>
+
 </ion-content>
