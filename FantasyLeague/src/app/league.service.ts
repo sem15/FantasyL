@@ -33,8 +33,7 @@ export class LeagueService {
             querySnapshot.forEach(function(doc) {
                 var league = doc.data();
                 // console.log(doc.id)
-                self.leagues.push({Title:league.Title,invCode:
-                  league.invCode,pool:league.pool,
+                self.leagues.push({Title:league.Title, invCode: league.invCode, pool:league.pool,
                   rosters:league.rosters})
             });
              self.publishEvent({
@@ -67,9 +66,29 @@ export class LeagueService {
 
     }
 
-    getItems(){
+  joinLeague(invCode){
+      this.db.collection("leagues").where("invCode","==",invCode).get().then(function(querySnapshot){
+        querySnapshot.forEach(function(doc){
+          var code = doc.data().invCode;
+          
+          alert(code + " ~ Was this your card?");
+          if(invCode != code){
+            console.log(invCode);
+          }
+          console.log(code);
+        });
+      }).catch(function(error){
+
+        //console.log("There is no league with that Invitation Code: " + error);
+      });
+
+      //alert(whichLeague + " ~ Was this your card?");
+  }
+
+  getItems(){
       return this.leagues;
-    }
+  }
+
   getLeagues():any{
     var LeagueObservable = new Observable(observer => {
       setTimeout(() => {

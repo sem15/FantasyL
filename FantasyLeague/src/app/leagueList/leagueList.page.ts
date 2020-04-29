@@ -16,7 +16,7 @@ export class leagueListPage implements OnInit{
   verify_form: FormGroup;
  
   //default leagues
-  leagues=[{"name": "Team Name", "region": "N. America", "owner": "Steven E."}]
+  leagues=[{"Title": "Team Name", "region": "N. America", "owner": "Steven E."}]
 
   constructor(private router: Router,
               public formBuilder: FormBuilder,
@@ -41,7 +41,9 @@ export class leagueListPage implements OnInit{
   }
 
   verifyCode(item){
-      alert("The code you entered was " + item.verificationCode);
+      this.leagueService.joinLeague(item.verificationCode);
+     //alert("The code you entered was " + item.verificationCode);
+
   }
 
   logout(){
