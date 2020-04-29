@@ -27,7 +27,7 @@ ngOnInit() {
   });
   this.password_form = this.formBuilder.group({
     email: new FormControl('', Validators.required)
-  })
+  });
 
 }
 

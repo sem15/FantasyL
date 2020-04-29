@@ -67,7 +67,9 @@ export class LeagueService {
 
     }
 
-
+    getItems(){
+      return this.leagues;
+    }
   getLeagues():any{
     var LeagueObservable = new Observable(observer => {
       setTimeout(() => {

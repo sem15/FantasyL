@@ -10,9 +10,32 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
- 
+<ion-list>
+  
+   <ion-item *ngFor="let league of leagues" (click)="goToLeagueOverview(league)">
+    
+    <ion-label>
+      {{ league.name }}  &nbsp; &nbsp; {{ league.region }}
+      <br>
+      Owner: {{ league.owner }}
+    </ion-label>
 
-  League List Page
+ </ion-item>
+ 
+</ion-list>
+<ion-item-divider>
+</ion-item-divider>
+  <form [formGroup]="verify_form" (submit)="verifyCode(verify_form.value)">
+    <ion-item>
+      <ion-label color="primary" position="floating">Verification Code Here</ion-label>
+      <ion-input type="text" formControlName="verificationCode" required></ion-input>
+    </ion-item>
+
+    <ion-button class="submit-btn" expand="block" type="submit" [disabled]="!verify_form.valid">Join League</ion-button>
+  </form>
+
+
 
   <ion-button class="submit-btn" expand = "block" (click)="createLeague()">Create New League</ion-button>
+
 </ion-content>
