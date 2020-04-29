@@ -78,13 +78,13 @@ export class LeagueService {
   joinLeague(newValues){
       this.db.collection("leagues").where("invCode","==",newValues.invCode).get().then(function(querySnapshot){
         querySnapshot.forEach(function(doc){
-          var code = doc.data().invCode;
+          var data = doc.data();
           
-          alert(code + " ~ Was this your card?");
-          // if(invCode != code){
-          //   console.log(invCode);
-          // }
-          console.log(code);
+          // alert(code + " ~ Was this your card?");
+          // // if(invCode != code){
+          // //   console.log(invCode);
+          // // }
+          // console.log(code);
         });
       }).catch(function(error){
 

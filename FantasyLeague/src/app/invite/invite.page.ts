@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router,ActivatedRoute } from '@angular/router';
 import {RosterService} from '../roster.service'
+import {LeagueService} from '../league.service'
 import * as firebase from 'firebase';
 
 @Component({
@@ -15,7 +16,8 @@ export class InvitePage implements OnInit {
   constructor(
     private router:Router,
     public formBuilder: FormBuilder,
-    public rosterService: RosterService
+    public rosterService: RosterService,
+    public leagueService: LeagueService
   ) { }
 
   ngOnInit() {
@@ -31,6 +33,9 @@ export class InvitePage implements OnInit {
       invCode:value.invCode
     }
     this.rosterService.addRoster(newValues);
+    setTimeout(()=>{
+     // this.leagueService.joinLeague();
+    },1000);
   	this.goBack();
   }
 
