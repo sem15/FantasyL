@@ -1,9 +1,23 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>invite</ion-title>
+    <ion-title>Invite Page</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <form [formGroup]="new_item_form" (submit)="join(new_item_form.value)">
+    <ion-item>
+      <ion-label color="primary" position="floating">Team</ion-label>
+      <ion-input type="text" formControlName="Team" required></ion-input>
+    </ion-item>
 
+  <ion-item>
+    <ion-label color="primary" position="floating">invCode</ion-label>
+    <ion-input type="text" formControlName="invCode" required></ion-input>
+  </ion-item>
+
+    <ion-button class="submit-btn" expand="block" type="submit" [disabled]="!new_item_form.valid">Join</ion-button>
+  </form>
 </ion-content>
