@@ -15,6 +15,8 @@ export class LeagueService {
   private eventSubject=new Subject<any>();
   db=firebase.firestore();
   leagues:Array<any>=[];
+  rosterName:any;
+
 
   //event notification
   publishEvent(data: any) {
@@ -43,7 +45,7 @@ export class LeagueService {
         } );
   }
 
-  createLeague(title){
+  createLeague(title,roster){
       var self=this;
       var uid=null;
 
@@ -56,7 +58,8 @@ export class LeagueService {
         })
         .then(function(docRef) {
             console.log("Document written with ID: ", docRef.id);
-
+            self.id = docRef.id;
+            self.rosterName = roster;
             //update this products arrays
         })
         .catch(function(error) {
@@ -66,15 +69,15 @@ export class LeagueService {
 
     }
 
-  joinLeague(invCode){
-      this.db.collection("leagues").where("invCode","==",invCode).get().then(function(querySnapshot){
+  joinLeague(newValues){
+      this.db.collection("leagues").where("invCode","==",newValues.invCode).get().then(function(querySnapshot){
         querySnapshot.forEach(function(doc){
           var code = doc.data().invCode;
           
           alert(code + " ~ Was this your card?");
-          if(invCode != code){
-            console.log(invCode);
-          }
+          // if(invCode != code){
+          //   console.log(invCode);
+          // }
           console.log(code);
         });
       }).catch(function(error){
