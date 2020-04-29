@@ -5,6 +5,7 @@ import { LeagueService } from '../league.service';
 import { RosterService } from '../roster.service';
 import * as firebase from 'firebase';
 
+
 @Component({
   selector: 'app-createleague',
   templateUrl: './createleague.page.html',
@@ -31,6 +32,7 @@ export class CreateleaguePage implements OnInit {
     });
   }
 
+
   // initRosters(){
   //   let userId = firebase.auth().currentUser.uid;
   //   this.rosterService.rosters_template[0]={
@@ -40,13 +42,16 @@ export class CreateleaguePage implements OnInit {
   //   this.rosterService.initializeRosters(this.leagueService.id,newValues);
   // }
 
+
   createLeague(value){
     console.log(value.title);
     console.log(value.roster);
     this.leagueService.createLeague(value.title, value.roster);
+
     // setTimeout(()=>{
     //   this.initRosters();
     // },1000);
+
 
 
 

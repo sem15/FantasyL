@@ -8,6 +8,7 @@ import {Subject} from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
 export class RosterService {
   param:any;
   id:any;
@@ -27,7 +28,7 @@ getObservable(): Subject<any> {
 }
 
   constructor(public router:Router,
-    ) { 
+    ) {
       var self=this;
 
       if(firebase.auth().currentUser!=null){
@@ -41,11 +42,11 @@ getObservable(): Subject<any> {
                   uid:roster.uid,id:doc.id})
                   self.players=roster.players;
              });
- 
+
              self.publishEvent({
                  foo: 'bar'
              });
- 
+
              console.log("items reloaded");
          } );
       }
@@ -66,16 +67,16 @@ getObservable(): Subject<any> {
                uid:roster.uid,id:doc.id})
                self.players=roster.players;
              });
-  
+
              self.publishEvent({
                  foo: 'bar'
              });
-  
+
              console.log("items reloaded");
          } );
       }
     }
-    
+
 
     getRoster():any{
       var RosterObservable = new Observable(observer => {
@@ -85,7 +86,7 @@ getObservable(): Subject<any> {
   });
       return RosterObservable;
     }
-  
+
     getPlayers():any{
       var playersObservable=new Observable(observer =>{
         setTimeout(()=>{
@@ -106,9 +107,10 @@ getObservable(): Subject<any> {
       }).catch(function(error){
         console.error("error removing document: ",error);
       });
-    
-    
+
+
     }
+
 
     addRoster(newValues)
     {
@@ -157,7 +159,19 @@ getObservable(): Subject<any> {
     //   console.log("Updated " + league_id + "with rosterList template.")
     // }
 
+
 }
+
+
+export class Roster {
+Team: string;
+id: string;
+invCode: string;
+constructor(player_id: string) {
+    this.id = player_id;
+  }
+}
+
 
 export const snapshotToArray = snapshot => {
   let returnArr = [];
