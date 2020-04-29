@@ -136,6 +136,7 @@ getObservable(): Subject<any> {
             'invCode':newValues.invCode,
             'id':docRef.id
           }
+          self.id=docRef.id;
           db.collection("roster").doc(docRef.id).update(values)
           //update this products arrays
       })
