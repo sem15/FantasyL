@@ -3,6 +3,8 @@ import { Validators, FormBuilder, FormControl, FormGroup } from '@angular/forms'
 import { Router } from '@angular/router';
 import { LeagueService } from '../league.service';
 import { RosterService } from '../roster.service';
+import * as firebase from 'firebase';
+
 
 @Component({
   selector: 'app-createleague',
@@ -30,17 +32,26 @@ export class CreateleaguePage implements OnInit {
     });
   }
 
-  initRosters(){
-    this.rosterService.initializeRosters(this.leagueService.id);
-  }
+
+  // initRosters(){
+  //   let userId = firebase.auth().currentUser.uid;
+  //   this.rosterService.rosters_template[0]={
+  //     Team:'default',
+  //       id:userId,
+  //   }
+  //   this.rosterService.initializeRosters(this.leagueService.id,newValues);
+  // }
+
 
   createLeague(value){
     console.log(value.title);
     console.log(value.roster);
     this.leagueService.createLeague(value.title, value.roster);
-    setTimeout(()=>{
-      this.initRosters();
-    },1000);
+
+    // setTimeout(()=>{
+    //   this.initRosters();
+    // },1000);
+
 
 
 

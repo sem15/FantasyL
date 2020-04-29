@@ -30,12 +30,12 @@ export class InvitePage implements OnInit {
       Team:value.Team,
       invCode:value.invCode
     }
-    //this.rosterService.join(newValues);
+    this.rosterService.addRoster(newValues);
   	this.goBack();
   }
 
   goBack(){
-    this.router.navigate(['/tabs/']);
+    this.router.navigate(['/tabs/leagueList']);
 }
 
 }
