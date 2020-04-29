@@ -76,15 +76,19 @@ export class LeagueService {
     }
 
   joinLeague(newValues){
-      this.db.collection("leagues").where("invCode","==",newValues.invCode).get().then(function(querySnapshot){
+    console.log(newValues.id);
+    var self=this;
+    var db=firebase.firestore();
+      db.collection("leagues").where("invCode","==",newValues.invCode).get().then(function(querySnapshot){
         querySnapshot.forEach(function(doc){
-          var data = doc.data();
+          var id=doc.id;
+          db.collection("leagues").doc(id).update(newValues).then(function(){
+            console.log("Document successfully updated");
+            console.log("Item updated:"+newValues.id);
+          }).catch(function(error){
+            console.error("error removing document: ",error);
+          });
           
-          // alert(code + " ~ Was this your card?");
-          // // if(invCode != code){
-          // //   console.log(invCode);
-          // // }
-          // console.log(code);
         });
       }).catch(function(error){
 
