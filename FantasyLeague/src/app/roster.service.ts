@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ChangeDetectorRef } from '@angular/core';
 
 import { Router } from '@angular/router';
 
@@ -15,6 +15,8 @@ export class RosterService {
   db=firebase.firestore();
   players:any;
   roster:Array<any>=[];
+  rosters_template:Array<any>=[];
+
 
   //event notification
   publishEvent(data: any) {
@@ -107,6 +109,53 @@ getObservable(): Subject<any> {
     
     
     }
+
+    addRoster(newValues)
+    {
+    var self=this;
+    var uid=null;
+    if (firebase.auth().currentUser !=  null){
+       uid=firebase.auth().currentUser.uid
+       console.log(uid, " :****** uid");
+    }
+    else{
+       console.log(" no user logged in, no order created")
+    }
+
+    var db = firebase.firestore();
+          db.collection("roster").add({
+            'uid':uid,
+            'Team':newValues.Team,
+            'invCode':newValues.invCode,
+      })
+      .then(function(docRef) {
+          console.log("Document written with ID: ", docRef.id);
+          let values={
+            'uid':uid,
+            'Team':newValues.Team,
+            'invCode':newValues.invCode,
+            'id':docRef.id
+          }
+          db.collection("roster").doc(docRef.id).update(values)
+          //update this products arrays
+      })
+      .catch(function(error) {
+          console.error("Error adding document: ", error);
+      });
+    }
+
+    // initializeRosters(league_id,newValues){
+    //   let userId = firebase.auth().currentUser.uid;
+    //   this.rosters_template.push({
+    //     Team:'default',
+    //     id:userId,
+    //     invCode:'default'
+    //   })
+    //   var self=this;
+    //   var db=firebase.firestore();
+    //   db.collection("leagues").doc(league_id).update(self.rosters_template);
+    //   console.log("Updated " + league_id + "with rosterList template.")
+    // }
 
 }
 
