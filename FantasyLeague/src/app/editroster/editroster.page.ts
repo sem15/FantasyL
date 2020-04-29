@@ -56,14 +56,14 @@ if(index!=-1)
     players:playerlist
   }
   console.log("PlayerList:"+playerlist);
-  //if(firebase.auth().currentUser.uid===this.current_player.uid)
-  //{
+  if(firebase.auth().currentUser.uid===this.rosterService.param.uid)
+  {
     this.rosterService.updateStatus(newValues);
-  //}
-  // else{
-  //   console.log("UID "+firebase.auth().currentUser.uid+ 
-  //   "doesn't match, "+this.current_player.uid+"item not updated")
-  // }
+  }
+  else{
+    console.log("UID "+firebase.auth().currentUser.uid+ 
+    "doesn't match, "+this.rosterService.param.uid+"item not updated")
+  }
 
 
   this.goBack();
