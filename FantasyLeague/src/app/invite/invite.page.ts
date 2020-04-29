@@ -34,7 +34,16 @@ export class InvitePage implements OnInit {
     }
     this.rosterService.addRoster(newValues);
     setTimeout(()=>{
-     // this.leagueService.joinLeague();
+      this.rosterService.rosters_template[0]={
+        'teamName':value.Team,
+        'uid':firebase.auth().currentUser.uid,
+        'rosterid':this.rosterService.id
+      };
+      let leagueValues={
+        invCode:value.invCode,
+        rosters:this.rosterService.rosters_template
+      };
+      this.leagueService.joinLeague(leagueValues);
     },1000);
   	this.goBack();
   }
