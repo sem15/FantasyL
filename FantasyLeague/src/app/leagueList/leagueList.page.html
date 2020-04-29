@@ -25,17 +25,17 @@
 </ion-list>
 <ion-item-divider>
 </ion-item-divider>
-  <form [formGroup]="verify_form" (submit)="verifyCode(verify_form.value)">
+  <!--<form [formGroup]="verify_form" (submit)="verifyCode(verify_form.value)">
     <ion-item>
       <ion-label color="primary" position="floating">Verification Code Here</ion-label>
       <ion-input type="text" formControlName="verificationCode" required></ion-input>
     </ion-item>
 
     <ion-button class="submit-btn" expand="block" type="submit" [disabled]="!verify_form.valid">Join League</ion-button>
-  </form>
+  </form>-->
 
 
-
+  <ion-button class="submit-btn" expand = "block" (click)="verifyCode()">Join Leagues</ion-button>
   <ion-button class="submit-btn" expand = "block" (click)="createLeague()">Create New League</ion-button>
 
 </ion-content>
