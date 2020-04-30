@@ -7,8 +7,26 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
+<form [formGroup]="new_draft_form" (submit)="draftForm(new_draft_form.value)">
+  <ion-list>
+  <ion-radio-group value="ign1">
+    <ion-list-header>
+      <ion-label>Top</ion-label>
+    </ion-list-header>
 
-<ion-button (click)="playerInfoTest()">Player Info</ion-button>
+    <ion-item>
+      <ion-label>Licorice</ion-label>
+      <ion-radio slot="start" value="Licorice"></ion-radio>
+    </ion-item>
 
+    <ion-item>
+      <ion-label>Blaber</ion-label>
+      <ion-radio slot="start" value="Blaber"></ion-radio>
+    </ion-item>
+  </ion-radio-group>
+</ion-list>
+
+<ion-button class="submit-btn" expand="block" type="submit" [disabled]="!new_draft_form.valid">Draft Players</ion-button>
+</form>
 </ion-content>
