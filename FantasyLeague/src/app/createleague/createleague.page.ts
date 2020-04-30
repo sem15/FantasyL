@@ -33,24 +33,34 @@ export class CreateleaguePage implements OnInit {
   }
 
 
-  // initRosters(){
-  //   let userId = firebase.auth().currentUser.uid;
-  //   this.rosterService.rosters_template[0]={
-  //     Team:'default',
-  //       id:userId,
-  //   }
-  //   this.rosterService.initializeRosters(this.leagueService.id,newValues);
-  // }
+   initRosters(rosterName, inviteCode){
+     let userId = firebase.auth().currentUser.uid;
+     let rosterslist:Array<any>=[];
+
+     let newValues={
+       Team:rosterName,
+       invCode:inviteCode,
+       rid:this.rosterService.id
+     }
+
+     this.rosterService.addRoster(newValues);
+
+     setTimeout(() => {
+       this.leagueService.initLeague(newValues)
+     }, 1000);
+
+   }
 
 
   createLeague(value){
     console.log(value.title);
     console.log(value.roster);
-    this.leagueService.createLeague(value.title, value.roster);
+    let randId =  Math.random().toString(36).substr(2, 5);
+    this.leagueService.createLeague(value.title, value.roster, randId);
 
-    // setTimeout(()=>{
-    //   this.initRosters();
-    // },1000);
+     setTimeout(()=>{
+       this.initRosters(value.roster, randId);
+     },1000);
 
 
 
