@@ -10,7 +10,7 @@
 <ion-content padding>
 <form [formGroup]="new_draft_form" (submit)="draftForm(new_draft_form.value)">
   <ion-list>
-  <ion-radio-group value="ign1">
+  <ion-radio-group type="text" formControlName="ign1">
     <ion-list-header>
       <ion-label>Top</ion-label>
     </ion-list-header>
@@ -19,12 +19,99 @@
       <ion-label>Licorice</ion-label>
       <ion-radio slot="start" value="Licorice"></ion-radio>
     </ion-item>
-
     <ion-item>
-      <ion-label>Blaber</ion-label>
-      <ion-radio slot="start" value="Blaber"></ion-radio>
+      <ion-label>Impact</ion-label>
+      <ion-radio slot="start" value="Impact"></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>Broken Blade</ion-label>
+      <ion-radio slot="start" value="Broken Blade"></ion-radio>
     </ion-item>
   </ion-radio-group>
+</ion-list>
+
+<ion-list>
+<ion-radio-group type="text" formControlName="ign2">
+  <ion-list-header>
+    <ion-label>Mid</ion-label>
+  </ion-list-header>
+
+  <ion-item>
+    <ion-label>Nisqy</ion-label>
+    <ion-radio slot="start" value="Nisqy"></ion-radio>
+  </ion-item>
+  <ion-item>
+    <ion-label>Jensen</ion-label>
+    <ion-radio slot="start" value="Jensen"></ion-radio>
+  </ion-item>
+  <ion-item>
+    <ion-label>Bjergsen</ion-label>
+    <ion-radio slot="start" value="Bjergsen"></ion-radio>
+  </ion-item>
+</ion-radio-group>
+</ion-list>
+
+<ion-list>
+<ion-radio-group type="text" formControlName="ign3">
+  <ion-list-header>
+    <ion-label>Jungle</ion-label>
+  </ion-list-header>
+
+  <ion-item>
+    <ion-label>Blaber</ion-label>
+    <ion-radio slot="start" value="Blaber"></ion-radio>
+  </ion-item>
+  <ion-item>
+    <ion-label>Broxah</ion-label>
+    <ion-radio slot="start" value="Broxah"></ion-radio>
+  </ion-item>
+  <ion-item>
+    <ion-label>Dardoch</ion-label>
+    <ion-radio slot="start" value="Dardoch"></ion-radio>
+  </ion-item>
+</ion-radio-group>
+</ion-list>
+
+<ion-list>
+<ion-radio-group type="text" formControlName="ign4">
+  <ion-list-header>
+    <ion-label>Bot</ion-label>
+  </ion-list-header>
+
+  <ion-item>
+    <ion-label>Zven</ion-label>
+    <ion-radio slot="start" value="Zven"></ion-radio>
+  </ion-item>
+  <ion-item>
+    <ion-label>Tactical</ion-label>
+    <ion-radio slot="start" value="Tactical"></ion-radio>
+  </ion-item>
+  <ion-item>
+    <ion-label>DoubleLift</ion-label>
+    <ion-radio slot="start" value="DoubleLift"></ion-radio>
+  </ion-item>
+</ion-radio-group>
+</ion-list>
+
+<ion-list>
+<ion-radio-group type="text" formControlName="ign5">
+  <ion-list-header>
+    <ion-label>Support</ion-label>
+  </ion-list-header>
+
+  <ion-item>
+    <ion-label>Vulcan</ion-label>
+    <ion-radio slot="start" value="Vulcan"></ion-radio>
+  </ion-item>
+  <ion-item>
+    <ion-label>CoreJJ</ion-label>
+    <ion-radio slot="start" value="CoreJJ"></ion-radio>
+  </ion-item>
+  <ion-item>
+    <ion-label>Biofrost</ion-label>
+    <ion-radio slot="start" value="Biofrost"></ion-radio>
+  </ion-item>
+</ion-radio-group>
 </ion-list>
 
 <ion-button class="submit-btn" expand="block" type="submit" [disabled]="!new_draft_form.valid">Draft Players</ion-button>
