@@ -114,36 +114,41 @@ getObservable(): Subject<any> {
     addRoster(newValues)
     {
     var self=this;
-    var uid=null;
-    if (firebase.auth().currentUser !=  null){
-       uid=firebase.auth().currentUser.uid
-       console.log(uid, " :****** uid");
-    }
-    else{
-       console.log(" no user logged in, no order created")
-    }
-
     var db = firebase.firestore();
-          db.collection("roster").add({
-            'uid':uid,
-            'Team':newValues.Team,
-            'invCode':newValues.invCode,
-      })
-      .then(function(docRef) {
-          console.log("Document written with ID: ", docRef.id);
-          let values={
-            'uid':uid,
-            'Team':newValues.Team,
-            'invCode':newValues.invCode,
-            'id':docRef.id
-          }
-          self.id=docRef.id;
-          db.collection("roster").doc(docRef.id).update(values)
-          //update this products arrays
-      })
-      .catch(function(error) {
-          console.error("Error adding document: ", error);
-      });
+      var newRost=db.collection("roster").doc();
+      let data={
+        'uid':firebase.auth().currentUser.uid,
+        'Team':newValues.Team,
+        'invCode':newValues.invCode,
+        'id':newRost.id
+      };
+      console.log(newRost.id);
+      console.log(data);
+      console.log("Setting doc");
+      newRost.set(data);
+      this.id=data.id;
+      console.log(this.id);
+    
+      //     db.collection("roster").add({
+      //       'uid':uid,
+      //       'Team':newValues.Team,
+      //       'invCode':newValues.invCode,
+      // })
+      // .then(function(docRef) {
+      //     console.log("Document written with ID: ", docRef.id);
+      //     let values={
+      //       'uid':uid,
+      //       'Team':newValues.Team,
+      //       'invCode':newValues.invCode,
+      //       'id':docRef.id
+      //     }
+      //     self.id=docRef.id;
+      //     db.collection("roster").doc(docRef.id).update(values)
+      //     //update this products arrays
+      // })
+      // .catch(function(error) {
+      //     console.error("Error adding document: ", error);
+      // });
     }
 
     // initializeRosters(league_id,newValues){
