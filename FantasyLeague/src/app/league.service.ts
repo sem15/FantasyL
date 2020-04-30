@@ -76,15 +76,27 @@ export class LeagueService {
     }
 
   joinLeague(newValues){
-    console.log(newValues.id);
+    console.log(newValues.invCode);
     var self=this;
     var db=firebase.firestore();
       db.collection("leagues").where("invCode","==",newValues.invCode).get().then(function(querySnapshot){
         querySnapshot.forEach(function(doc){
           var id=doc.id;
-          db.collection("leagues").doc(id).update(newValues).then(function(){
+          let rosterslist=doc.data().rosters;
+
+          rosterslist.push({
+            'teamName':newValues.Team,
+            'uid':firebase.auth().currentUser.uid,
+            'rosterid':id
+          });
+          let leagueValues={
+            invCode:newValues.invCode,
+            rosters:rosterslist
+          };
+
+          db.collection("leagues").doc(id).update(leagueValues).then(function(){
             console.log("Document successfully updated");
-            console.log("Item updated:"+newValues.id);
+            console.log("Item updated:"+newValues);
           }).catch(function(error){
             console.error("error removing document: ",error);
           });
@@ -112,3 +124,16 @@ export class LeagueService {
   }
 
 }
+export const snapshotToArray = snapshot => {
+  let returnArr = [];
+
+  snapshot.forEach(childSnapshot => {
+      let item = childSnapshot.val();
+      item.id = childSnapshot.key;
+      // console.log(item);
+      returnArr.push(item);
+  });
+
+  return returnArr;
+}
+
