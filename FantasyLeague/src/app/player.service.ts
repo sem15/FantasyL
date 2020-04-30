@@ -12,6 +12,7 @@ export class PlayerService {
   param:any
   private eventSubject=new Subject<any>();
   playerlist:Array<any>=[];
+  list:any;
   db=firebase.firestore();
 
   //event notification
@@ -31,9 +32,11 @@ getObservable(): Subject<any> {
        .onSnapshot(function(querySnapshot) {
              self.playerlist = [];
              querySnapshot.forEach(function(doc) {
-                 var theplayerlist = doc.data();
-                 self.playerlist.push({Name:theplayerlist.playersList});
-                 //self.playerlist.push({Name:player.Name})
+
+                 var player = doc.data();
+                 self.playerlist.push({id:player.id,playerslist:player.playersList})
+                 self.list=player.playersList;
+
              });
 
              self.publishEvent({
