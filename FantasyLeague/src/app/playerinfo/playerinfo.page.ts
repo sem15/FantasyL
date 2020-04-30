@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
+import {PlayerService} from'../player.service';
+
 
 @Component({
   selector: 'app-playerinfo',
@@ -7,10 +9,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./playerinfo.page.scss'],
 })
 export class PlayerinfoPage implements OnInit {
-
-  constructor(private router: Router) { }
+currentplayer:any;
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private playerService:PlayerService) { }
 
   ngOnInit() {
+    this.currentplayer=this.playerService.param;
+    console.log(this.currentplayer);
   }
 
   goBack(){
