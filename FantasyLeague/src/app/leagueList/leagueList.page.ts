@@ -16,13 +16,27 @@ export class leagueListPage implements OnInit{
   verify_form: FormGroup;
  
   //default leagues
-  leagues=[{"Title": "Team Name", "region": "N. America", "owner": "Steven E."}]
+  //leagues=[{"Title": "Team Name", "region": "N. America", "owner": "Steven E."}]
+  leagues:Array<any>=[];
+  db=firebase.firestore();
+  myleagues:Array<any>=[];
 
   constructor(private router: Router,
               public formBuilder: FormBuilder,
               public leagueService: LeagueService,
               ) {
-                //this.items = this.leagueService.getItems();
+                this.leagues = this.leagueService.getItems();
+                console.log(this.leagues);
+                for (let i = 0; i < this.leagues.length; i++) {
+                  this.db.collection("leagues").where("invCode","==",this.leagues[i]).get().then(function(querySnapshot) {
+                    querySnapshot.forEach(function(doc){
+                      var match = doc.data();
+                      this.myleagues.push({title:match.Title, invCode:match.invCode})
+                    })
+                  });
+                  
+                }
+               // this.leagues = this.leagueService.getItems();
               }
 
 
@@ -30,6 +44,7 @@ export class leagueListPage implements OnInit{
     this.verify_form = this.formBuilder.group({
       verificationCode: new FormControl('', Validators.required)
     });
+    
   }
 
   createLeague(){
@@ -41,7 +56,10 @@ export class leagueListPage implements OnInit{
   }
 
   verifyCode(){
-      this.router.navigate(["./tabs/invite"]);
+    //var array = this.leagueService.getItems();
+    
+    
+    //  this.router.navigate(["./tabs/invite"]);
      // this.leagueService.joinLeague(item.verificationCode);
      //alert("The code you entered was " + item.verificationCode);
 

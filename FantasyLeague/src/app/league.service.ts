@@ -15,6 +15,7 @@ export class LeagueService {
   private eventSubject=new Subject<any>();
   db=firebase.firestore();
   leagues:Array<any>=[];
+  testarr:Array<any>=[];
 
   //event notification
   publishEvent(data: any) {
@@ -41,6 +42,22 @@ export class LeagueService {
             });
             console.log("leagues loaded");
         } );
+
+//
+        this.db.collection("leagues").get().then(function(querySnapshot){
+          querySnapshot.forEach(function(doc) {
+            //console.log(doc.id);
+            var invCode = doc.data();
+            self.testarr.push(invCode.invCode);
+            
+            //test = doc.id;
+    
+    
+          });
+        }).catch(function(error) {
+            alert(error.message);
+            console.log("errors");
+          });
   }
 
   createLeague(title){
@@ -86,7 +103,27 @@ export class LeagueService {
   }
 
   getItems(){
-      return this.leagues;
+    //var self=this;
+    var test;
+    //var size = 0;
+    console.log(this.testarr);
+
+      /*for (let i = 0; i < self.testarr.length; i++) {
+        console.log(self.testarr[i]);
+      }
+      //console.log(test);
+
+    /*this.db.collection('leagues').get().then(snap => {
+      size = snap.size // will return the collection size
+      for (let i = 0; i < size; i++) {
+        leagues.push(this.db.collection('leagues').get().
+      }
+    });
+    */
+    //alert(size);
+    //  leagues = this.db.collection("leagues")
+      return this.testarr;
+  
   }
 
   getLeagues():any{
