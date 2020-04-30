@@ -26,7 +26,20 @@ export class leagueListPage implements OnInit{
               public formBuilder: FormBuilder,
               public leagueService: LeagueService,
               ) {
-                //var self = this;
+                this.leagueService.getObservable().subscribe((data) => {
+                  var myuid = firebase.auth().currentUser.uid; //does match roster.uid
+                  console.log(myuid);
+                  this.leagues = this.leagueService.leagues;//gives ALL Leagues
+                  console.log(this.leagues);
+                  for (let i = 0; i < this.leagues.length; i++){
+                    for (let j = 0; j < this.leagues[i].rosters.length; j++){
+                      console.log(this.leagues[i].rosters.length + " Current Roster length");
+                      if(myuid == this.leagues[i].rosters[j].uid){
+                        this.currentlist.push(this.leagues[i]);
+                      }
+                    }
+                  }
+                });
                 
                // this.leagues = this.leagueService.getItems();
                 //console.log(this.leagues);
@@ -44,22 +57,6 @@ export class leagueListPage implements OnInit{
                   
                 }*/
 
-
-               // this.leagues = this.leagueService.getItems();
-              // for (let i = 0; i < this.leagues.length; i++) {
-               // console.log(this.leagues[i]);
-              //  this.db.collection("leagues").where("invCode","==",this.leagues[i]).get().then(function(querySnapshot) {
-                  
-                  
-                 // querySnapshot.forEach(function(doc){
-                 //   var match = doc.data();
-                    //this.myleagues.push({title:match.Title, invCode:match.invCode});
-                   // console.log(self.myleagues);
-                 // })
-               // });
-
-            //  }
-
               }
 
 
@@ -71,7 +68,7 @@ export class leagueListPage implements OnInit{
 
 
     //This is the array displayed on League List v
-    this.myleagues=this.leagueService.getLeagues();
+    this.myleagues = this.currentlist;
     
     
 
