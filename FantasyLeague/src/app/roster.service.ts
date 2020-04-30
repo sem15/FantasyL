@@ -115,7 +115,6 @@ getObservable(): Subject<any> {
 
     addRoster(newValues)
     {
-    var self=this;
     var db = firebase.firestore();
       var newRost=db.collection("roster").doc();
       let data={

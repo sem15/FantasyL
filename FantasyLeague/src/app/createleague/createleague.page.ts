@@ -40,13 +40,17 @@ export class CreateleaguePage implements OnInit {
      let newValues={
        Team:rosterName,
        invCode:inviteCode,
-       rid:this.rosterService.id
      }
 
      this.rosterService.addRoster(newValues);
+     let leagueValues={
+      Team:rosterName,
+      invCode:inviteCode,
+      rid:this.rosterService.id
+    }
 
      setTimeout(() => {
-       this.leagueService.initLeague(newValues)
+       this.leagueService.initLeague(leagueValues)
      }, 1000);
 
    }
