@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ChangeDetectorRef } from '@angular/core';
 
 import { Router } from '@angular/router';
 
@@ -8,6 +8,7 @@ import {Subject} from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
 export class RosterService {
   param:any;
   id:any;
@@ -15,6 +16,9 @@ export class RosterService {
   db=firebase.firestore();
   players:any;
   roster:Array<any>=[];
+  rosters_template:Array<any>=[
+  ];
+
 
   //event notification
   publishEvent(data: any) {
@@ -25,7 +29,7 @@ getObservable(): Subject<any> {
 }
 
   constructor(public router:Router,
-    ) { 
+    ) {
       var self=this;
 
       if(firebase.auth().currentUser!=null){
@@ -39,11 +43,11 @@ getObservable(): Subject<any> {
                   uid:roster.uid,id:doc.id})
                   self.players=roster.players;
              });
- 
+
              self.publishEvent({
                  foo: 'bar'
              });
- 
+
              console.log("items reloaded");
          } );
       }
@@ -64,16 +68,16 @@ getObservable(): Subject<any> {
                uid:roster.uid,id:doc.id})
                self.players=roster.players;
              });
-  
+
              self.publishEvent({
                  foo: 'bar'
              });
-  
+
              console.log("items reloaded");
          } );
       }
     }
-    
+
 
     getRoster():any{
       var RosterObservable = new Observable(observer => {
@@ -83,7 +87,7 @@ getObservable(): Subject<any> {
   });
       return RosterObservable;
     }
-  
+
     getPlayers():any{
       var playersObservable=new Observable(observer =>{
         setTimeout(()=>{
@@ -104,11 +108,76 @@ getObservable(): Subject<any> {
       }).catch(function(error){
         console.error("error removing document: ",error);
       });
-    
-    
+
+
     }
 
+
+    addRoster(newValues)
+    {
+    var db = firebase.firestore();
+      var newRost=db.collection("roster").doc();
+      let data={
+        'uid':firebase.auth().currentUser.uid,
+        'Team':newValues.Team,
+        'invCode':newValues.invCode,
+        'id':newRost.id
+      };
+      console.log(newRost.id);
+      console.log(data);
+      console.log("Setting doc");
+      newRost.set(data);
+      this.id=data.id;
+      console.log(this.id);
+    
+      //     db.collection("roster").add({
+      //       'uid':uid,
+      //       'Team':newValues.Team,
+      //       'invCode':newValues.invCode,
+      // })
+      // .then(function(docRef) {
+      //     console.log("Document written with ID: ", docRef.id);
+      //     let values={
+      //       'uid':uid,
+      //       'Team':newValues.Team,
+      //       'invCode':newValues.invCode,
+      //       'id':docRef.id
+      //     }
+      //     self.id=docRef.id;
+      //     db.collection("roster").doc(docRef.id).update(values)
+      //     //update this products arrays
+      // })
+      // .catch(function(error) {
+      //     console.error("Error adding document: ", error);
+      // });
+    }
+
+    // initializeRosters(league_id,newValues){
+    //   let userId = firebase.auth().currentUser.uid;
+    //   this.rosters_template.push({
+    //     Team:'default',
+    //     id:userId,
+    //     invCode:'default'
+    //   })
+    //   var self=this;
+    //   var db=firebase.firestore();
+    //   db.collection("leagues").doc(league_id).update(self.rosters_template);
+    //   console.log("Updated " + league_id + "with rosterList template.")
+    // }
+
+
 }
+
+
+export class Roster {
+Team: string;
+id: string;
+invCode: string;
+constructor(player_id: string) {
+    this.id = player_id;
+  }
+}
+
 
 export const snapshotToArray = snapshot => {
   let returnArr = [];
