@@ -75,6 +75,7 @@ export class LeagueService {
 
     }
 
+    
   joinLeague(newValues){
     console.log(newValues.invCode);
     var self=this;
@@ -85,21 +86,25 @@ export class LeagueService {
           let rosterslist=doc.data().rosters;
 
           rosterslist.push({
+            'rosterid':newValues.rid,
             'teamName':newValues.Team,
             'uid':firebase.auth().currentUser.uid,
-            'rosterid':id
           });
           let leagueValues={
+            Title:newValues.Team,
             invCode:newValues.invCode,
             rosters:rosterslist
           };
-
-          db.collection("leagues").doc(id).update(leagueValues).then(function(){
-            console.log("Document successfully updated");
-            console.log("Item updated:"+newValues);
-          }).catch(function(error){
-            console.error("error removing document: ",error);
-          });
+          console.log(leagueValues);
+          console.log(id);
+          setTimeout(() => {
+            db.collection("leagues").doc(id).update(leagueValues).then(function(){
+              console.log("Document successfully updated");
+              console.log("Item updated:"+newValues);
+            }).catch(function(error){
+              console.error("error removing document: ",error);
+            });
+          }, 1000);
           
         });
       }).catch(function(error){
@@ -110,6 +115,7 @@ export class LeagueService {
       //alert(whichLeague + " ~ Was this your card?");
   }
 
+  
   getItems(){
       return this.leagues;
   }
