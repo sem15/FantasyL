@@ -17,6 +17,8 @@ export class LeagueService {
   db=firebase.firestore();
   leagues:Array<any>=[];
   testarr:Array<any>=[];
+  myrosters: any;
+
   rosterName:any;
 
 

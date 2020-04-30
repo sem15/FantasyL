@@ -8,21 +8,18 @@
 </ion-header>
 
 <ion-content>
-
-  <ion-button (click)="draftLobbyTest()">Draft Lobby</ion-button>
-
   <ion-list>
-    <ion-item *ngFor="let rost of roster" (click)="goToRoster(rost)"> 
+    <ion-item *ngFor="let roster of rosters" (click)="goToRoster(roster)"> 
     <ion-label class=ion-text-wrap>
-      Team:{{rost.Team}}
-      <ion-item *ngFor="let players of rost.players">
-      <ion-label class="ion-text-wrap">
-        Name: {{players.Name}}
-        Position:{{players.Position}}
-      </ion-label>
-      </ion-item>
+      Team:{{roster.Team}}
+      
     </ion-label>
     </ion-item>
   </ion-list>
+
+
+  <ion-button (click)="draftLobbyTest()">Draft Lobby</ion-button>
+
+
 
 </ion-content>
