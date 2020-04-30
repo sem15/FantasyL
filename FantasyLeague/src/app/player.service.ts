@@ -23,7 +23,7 @@ getObservable(): Subject<any> {
 }
 
 
-  constructor(public router:Router,) 
+  constructor(public router:Router,)
   {
       var self=this;
 
@@ -51,7 +51,14 @@ getObservable(): Subject<any> {
     })
     return playersObservable;
   }
+
+  sendToRoster(ign1, ign2, ign3, ign4, ign5) {
+    
+  }
+
 }
+
+
 
 export const snapshotToArray = snapshot => {
   let returnArr = [];
