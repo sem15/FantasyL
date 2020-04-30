@@ -20,6 +20,7 @@ export class DraftlobbyPage implements OnInit {
   botList:Array<any>=[];
   supList:Array<any>=[];
   playersList:Array<any>=[];
+  playerinfo:Array<any>=[];
 
 
   constructor(
@@ -29,9 +30,7 @@ export class DraftlobbyPage implements OnInit {
     public rosterService: RosterService,
     private playerService:PlayerService
   ) {
-    this.playerService.getPlayers();
-    this.playersList = this.playerService.playerlist;
-    console.log("got " + this.playersList.length + " players loaded.");
+    this.playersList=this.playerService.list;
     //for (let i = 0; i < this.playersList.length; i++) {
       //if(this.playersList[i].Position == "Top") {
         //this.topList.push(this.playersList[i]);
@@ -53,8 +52,67 @@ export class DraftlobbyPage implements OnInit {
   }
 
 draftForm(value) {
-  var self=this;
+  console.log(this.playersList);
   var db=firebase.firestore();
+  console.log(this.playersList[0].IGN);
+  console.log(value.ign1);
+  for(let i=0;i<this.playersList.length;i++)
+  {
+    if(this.playersList[i].IGN==value.ign1)
+    {
+      this.playerinfo.push({
+        'IGN':this.playersList[i].IGN,
+        'Name':this.playersList[i].Name,
+        'Position':this.playersList[i].Position,
+        'Points':this.playersList[i].points,
+        'Status':'Active'
+      });
+    }
+    else if(this.playersList[i].IGN==value.ign2)
+    {
+      this.playerinfo.push({
+        'IGN':this.playersList[i].IGN,
+        'Name':this.playersList[i].Name,
+        'Position':this.playersList[i].Position,
+        'Points':this.playersList[i].points,
+        'Status':'Active'
+      });
+    }
+    else if(this.playersList[i].IGN==value.ign3)
+    {
+      this.playerinfo.push({
+        'IGN':this.playersList[i].IGN,
+        'Name':this.playersList[i].Name,
+        'Position':this.playersList[i].Position,
+        'Points':this.playersList[i].points,
+        'Status':'Active'
+      });
+    }
+    else if(this.playersList[i].IGN==value.ign4)
+    {
+      this.playerinfo.push({
+        'IGN':this.playersList[i].IGN,
+        'Name':this.playersList[i].Name,
+        'Position':this.playersList[i].Position,
+        'Points':this.playersList[i].points,
+        'Status':'Active'
+      });
+    }
+    else if(this.playersList[i].IGN==value.ign5)
+    {
+      this.playerinfo.push({
+        'IGN':this.playersList[i].IGN,
+        'Name':this.playersList[i].Name,
+        'Position':this.playersList[i].Position,
+        'Points':this.playersList[i].points,
+        'Status':'Active'
+      });
+    }
+  }
+  console.log("fill roster");
+  console.log(this.playerinfo);
+    this.rosterService.fillRoster(this.playerinfo);
+    this.goBack();
   //setTimeout(() => {
     //db.collection("leagues").doc(id).update(ig1).then(function(){
       //console.log("Document successfully updated");
