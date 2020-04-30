@@ -26,23 +26,26 @@ export class leagueListPage implements OnInit{
               public formBuilder: FormBuilder,
               public leagueService: LeagueService,
               ) {
+                this.currentlist=this.leagueService.currentlist;  
                 this.leagueService.getObservable().subscribe((data) => {
-                  var myuid = firebase.auth().currentUser.uid; //does match roster.uid
-                  console.log(myuid);
-                  this.leagues = this.leagueService.leagues;//gives ALL Leagues
-                  console.log(this.leagues);
-                  console.log(this.leagueService.leagues);
-                  this.currentlist=[];
-                  for (let i = 0; i < this.leagues.length; i++){
-                    for (let j = 0; j < this.leagues[i].rosters.length; j++){
-                      console.log(this.leagues[i].rosters.length + " Current Roster length");
-                      if(myuid == this.leagues[i].rosters[j].uid){
-                        this.currentlist.push(this.leagues[i]);
-                      }
-                    }
-                  }
-                  console.log(this.currentlist);
+                  this.currentlist=this.leagueService.currentlist;
+                  // var myuid = firebase.auth().currentUser.uid; //does match roster.uid
+                  // console.log(myuid);
+                  // this.leagues = this.leagueService.leagues;//gives ALL Leagues
+                  // console.log(this.leagues);
+                  // console.log(this.leagueService.leagues);
+                  // this.currentlist=[];
+                  // for (let i = 0; i < this.leagueService.leagues.length; i++){
+                  //   for (let j = 0; j < this.leagueService.leagues[i].rosters.length; j++){
+                  //     console.log(this.leagueService.leagues[i].rosters.length + " Current Roster length");
+                  //     if(myuid == this.leagueService.leagues[i].rosters[j].uid){
+                  //       this.currentlist.push(this.leagueService.leagues[i]);
+                  //     }
+                  //   }
+                  // }
+                  // console.log(this.currentlist);
                 });
+                
                 
                // this.leagues = this.leagueService.getItems();
                 //console.log(this.leagues);

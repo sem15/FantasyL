@@ -68,8 +68,9 @@ export class CreateleaguePage implements OnInit {
 
 
 
-
-  	this.goBack();
+    setTimeout(() => {
+      this.goBack();
+    }, 1000);
   }
 
   goBack(){
