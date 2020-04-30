@@ -74,7 +74,7 @@ export class LeagueService {
 
     }
 
-    
+
   joinLeague(newValues){
     console.log(newValues.invCode);
     var self=this;
@@ -90,7 +90,6 @@ export class LeagueService {
             'uid':firebase.auth().currentUser.uid,
           });
           let leagueValues={
-            Title:newValues.Team,
             invCode:newValues.invCode,
             rosters:rosterslist
           };
@@ -105,7 +104,7 @@ export class LeagueService {
               console.error("error removing document: ",error);
             });
           }, 1000);
-          
+
 
         });
       }).catch(function(error){
