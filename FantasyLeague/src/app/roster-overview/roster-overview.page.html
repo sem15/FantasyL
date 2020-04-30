@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Roster Overview</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+    <ion-item *ngFor="let players of currentroster.players" (click)="updateStatus(players)">
+      <ion-label>
+        Name: {{players.Name}}
+        Position: {{players.Position}}
+        Status: {{players.Status}}
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-item>
+  <ion-label>
+    Team Name:{{currentroster.Team}}
+  </ion-label>
+</ion-item>
+  
+</ion-content>
