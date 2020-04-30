@@ -31,6 +31,7 @@ export class leagueListPage implements OnInit{
                   console.log(myuid);
                   this.leagues = this.leagueService.leagues;//gives ALL Leagues
                   console.log(this.leagues);
+                  console.log(this.leagueService.leagues);
                   for (let i = 0; i < this.leagues.length; i++){
                     for (let j = 0; j < this.leagues[i].rosters.length; j++){
                       console.log(this.leagues[i].rosters.length + " Current Roster length");
@@ -39,6 +40,7 @@ export class leagueListPage implements OnInit{
                       }
                     }
                   }
+                  console.log(this.currentlist);
                 });
                 
                // this.leagues = this.leagueService.getItems();
