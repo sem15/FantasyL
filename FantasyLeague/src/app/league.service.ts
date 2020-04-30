@@ -47,7 +47,7 @@ export class LeagueService {
   }
 
 
-  createLeague(title,roster){
+  createLeague(title,roster, randId){
 
 
       var self=this;
@@ -55,7 +55,6 @@ export class LeagueService {
 
 
       var db = firebase.firestore();
-      let randId =  Math.random().toString(36).substr(2, 5);
       db.collection("leagues").add({
         'Title': title,
         'invCode': randId
@@ -85,9 +84,9 @@ export class LeagueService {
           let rosterslist=doc.data().rosters;
 
           rosterslist.push({
+            'rosterid':newValues.rid,
             'teamName':newValues.Team,
             'uid':firebase.auth().currentUser.uid,
-            'rosterid':id
           });
           let leagueValues={
             invCode:newValues.invCode,
@@ -100,7 +99,7 @@ export class LeagueService {
           }).catch(function(error){
             console.error("error removing document: ",error);
           });
-          
+
         });
       }).catch(function(error){
 
@@ -108,6 +107,39 @@ export class LeagueService {
       });
 
       //alert(whichLeague + " ~ Was this your card?");
+  }
+
+  initLeague(newValues) {
+    console.log(newValues.invCode);
+    var self=this;
+    var db=firebase.firestore();
+      db.collection("leagues").where("invCode","==",newValues.invCode).get().then(function(querySnapshot){
+        querySnapshot.forEach(function(doc){
+          var id=doc.id;
+          let rosterslist:Array<any>=[];
+
+          rosterslist.push({
+            'rosterid':newValues.rid,
+            'teamName':newValues.Team,
+            'uid':firebase.auth().currentUser.uid,
+          });
+          let leagueValues={
+            invCode:newValues.invCode,
+            rosters:rosterslist
+          };
+
+          db.collection("leagues").doc(id).update(leagueValues).then(function(){
+            console.log("Document successfully updated");
+            console.log("Item updated:"+newValues);
+          }).catch(function(error){
+            console.error("error removing document: ",error);
+          });
+
+        });
+      }).catch(function(error){
+
+        //console.log("There is no league with that Invitation Code: " + error);
+      });
   }
 
   getItems(){
@@ -136,4 +168,3 @@ export const snapshotToArray = snapshot => {
 
   return returnArr;
 }
-

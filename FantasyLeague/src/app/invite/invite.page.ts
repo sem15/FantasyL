@@ -30,7 +30,8 @@ export class InvitePage implements OnInit {
   join(value){
     let newValues={
       Team:value.Team,
-      invCode:value.invCode
+      invCode:value.invCode,
+      rid:this.rosterService.id
     }
     this.rosterService.addRoster(newValues);
 
