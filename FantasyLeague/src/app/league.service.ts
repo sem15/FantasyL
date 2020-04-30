@@ -18,7 +18,7 @@ export class LeagueService {
   leagues:Array<any>=[];
   testarr:Array<any>=[];
   myrosters: any;
-
+  currentlist:Array<any>=[];
   rosterName:any;
 
 
@@ -41,6 +41,17 @@ export class LeagueService {
                 // console.log(doc.id)
                 self.leagues.push({Title:league.Title, invCode: league.invCode, pool:league.pool,
                   rosters:league.rosters})
+                  self.currentlist=[];
+                  for (let i = 0; i < self.leagues.length; i++){
+                    for (let j = 0; j < self.leagues[i].rosters.length; j++){
+                      console.log(self.leagues[i].rosters.length + " Current Roster length");
+                      if(firebase.auth().currentUser.uid == self.leagues[i].rosters[j].uid){
+                        self.currentlist.push(self.leagues[i]);
+                      }
+                    }
+                  }
+                  console.log(self.currentlist);
+
             });
              self.publishEvent({
                 foo: 'bar'
@@ -63,6 +74,7 @@ export class LeagueService {
             alert(error.message);
             console.log("errors");
           });
+
   }
   refresh(){
     var self=this;
@@ -92,23 +104,36 @@ export class LeagueService {
 
 
       var db = firebase.firestore();
-      db.collection("leagues").add({
-        'Title': title,
-        'invCode': randId
-        })
-        .then(function(docRef) {
-            console.log("Document written with ID: ", docRef.id);
-            self.id = docRef.id;
-            self.rosterName = roster;
+      var newLeague=db.collection("leagues").doc();
+      let data={
+        'Title':title,
+        'invCode':randId,
+      }
+      console.log(data.Title);
+      console.log(data.invCode);
+      newLeague.set(data);
+      this.id=newLeague.id;
+      this.rosterName=roster;
+      console.log(this.rosterName);
+      console.log(this.id);
+      // db.collection("leagues").add({
+      //   'Title': title,
+      //   'invCode': randId
+      //   })
+      //   .then(function(docRef) {
+      //       console.log("Document written with ID: ", docRef.id);
+      //       this.id = docRef.id;
+      //       console.log(docRef.id);
+      //       this.rosterName = roster;
 
 
 
-        })
-        .catch(function(error) {
-            console.error("Error adding document: ", error);
-        });
+      //   })
+      //   .catch(function(error) {
+      //       console.error("Error adding document: ", error);
+      //   });
 
-        db.collection("Users").id;
+        //db.collection("Users").id;
 
 
     }

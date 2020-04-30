@@ -112,6 +112,24 @@ getObservable(): Subject<any> {
 
     }
 
+    fillRoster(playerlist)
+    {
+      let rostValues={
+        id:this.id,
+        players:playerlist
+      };
+      console.log(this.id);
+      var self=this;
+      var db=firebase.firestore();
+      db.collection("roster").doc(this.id).update(rostValues).then(function(){
+        console.log("Document successfully updated");
+        console.log("Item updated:");
+        self.refresh();
+      }).catch(function(error){
+        console.error("error removing document: ",error);
+      });
+    }
+
 
     addRoster(newValues)
     {
