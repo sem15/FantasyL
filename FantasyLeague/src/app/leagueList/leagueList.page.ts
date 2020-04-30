@@ -32,6 +32,7 @@ export class leagueListPage implements OnInit{
                   this.leagues = this.leagueService.leagues;//gives ALL Leagues
                   console.log(this.leagues);
                   console.log(this.leagueService.leagues);
+                  this.currentlist=[];
                   for (let i = 0; i < this.leagues.length; i++){
                     for (let j = 0; j < this.leagues[i].rosters.length; j++){
                       console.log(this.leagues[i].rosters.length + " Current Roster length");
