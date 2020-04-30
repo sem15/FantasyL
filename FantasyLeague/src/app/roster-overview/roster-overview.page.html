@@ -10,18 +10,20 @@
 <ion-content>
 
   <ion-list>
-    <ion-item *ngFor="let players of currentroster.players" (click)="updateStatus(players)">
+
+    <ion-label>
+      Team Name:{{currentroster.teamName}}
+    </ion-label>
+    <ion-item *ngFor="let player of playerlist" (click)="updateStatus(players)">
       <ion-label>
-        Name: {{players.Name}}
-        Position: {{players.Position}}
-        Status: {{players.Status}}
+        Name: {{player.Name}}
+        Position: {{player.Position}}
+        Status: {{player.Status}}
       </ion-label>
     </ion-item>
   </ion-list>
   <ion-item>
-  <ion-label>
-    Team Name:{{currentroster.Team}}
-  </ion-label>
+  
 </ion-item>
   
 </ion-content>
