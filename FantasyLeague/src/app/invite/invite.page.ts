@@ -33,6 +33,7 @@ export class InvitePage implements OnInit {
       invCode:value.invCode,
       rid:this.rosterService.id
     }
+    console.log(newValues);
     this.rosterService.addRoster(newValues);
 
     setTimeout(() => {
