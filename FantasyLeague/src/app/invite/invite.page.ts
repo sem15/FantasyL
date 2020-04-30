@@ -30,14 +30,17 @@ export class InvitePage implements OnInit {
   join(value){
     let newValues={
       Team:value.Team,
-      invCode:value.invCode,
-      rid:this.rosterService.id
-    }
+      invCode:value.invCode
+    };
     console.log(newValues);
     this.rosterService.addRoster(newValues);
-
+    let leagueValues={
+      Team:value.Team,
+      invCode:value.invCode,
+      rid:this.rosterService.id
+    };
     setTimeout(() => {
-      this.leagueService.joinLeague(newValues)
+      this.leagueService.joinLeague(leagueValues)
     }, 1000);
   	this.goBack();
   }
