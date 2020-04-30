@@ -14,7 +14,7 @@
   <ion-list>
     <ion-item *ngFor="let rost of roster" (click)="goToRoster(rost)"> 
     <ion-label class=ion-text-wrap>
-      uid:{{rost.uid}}
+      Team:{{rost.Team}}
       <ion-item *ngFor="let players of rost.players">
       <ion-label class="ion-text-wrap">
         Name: {{players.Name}}

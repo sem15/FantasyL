@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 
 import * as firebase from 'firebase';
 import { Observable } from 'rxjs';
-import {Subject} from 'rxjs';
+import { Subject } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,8 @@ export class LeagueService {
   db=firebase.firestore();
   leagues:Array<any>=[];
   testarr:Array<any>=[];
+  rosterName:any;
+
 
   //event notification
   publishEvent(data: any) {
@@ -60,21 +63,26 @@ export class LeagueService {
           });
   }
 
-  createLeague(title){
+
+  createLeague(title,roster, randId){
+
+
       var self=this;
       var uid=null;
 
 
       var db = firebase.firestore();
-      let randId =  Math.random().toString(36).substr(2, 5);
       db.collection("leagues").add({
         'Title': title,
         'invCode': randId
         })
         .then(function(docRef) {
             console.log("Document written with ID: ", docRef.id);
+            self.id = docRef.id;
+            self.rosterName = roster;
 
-            //update this products arrays
+
+
         })
         .catch(function(error) {
             console.error("Error adding document: ", error);
@@ -83,16 +91,39 @@ export class LeagueService {
 
     }
 
-  joinLeague(invCode){
-      this.db.collection("leagues").where("invCode","==",invCode).get().then(function(querySnapshot){
+    
+  joinLeague(newValues){
+    console.log(newValues.invCode);
+    var self=this;
+    var db=firebase.firestore();
+      db.collection("leagues").where("invCode","==",newValues.invCode).get().then(function(querySnapshot){
         querySnapshot.forEach(function(doc){
-          var code = doc.data().invCode;
+          var id=doc.id;
+          let rosterslist=doc.data().rosters;
+
+          rosterslist.push({
+            'rosterid':newValues.rid,
+            'teamName':newValues.Team,
+            'uid':firebase.auth().currentUser.uid,
+          });
+          let leagueValues={
+            Title:newValues.Team,
+            invCode:newValues.invCode,
+            rosters:rosterslist
+          };
+
+          console.log(leagueValues);
+          console.log(id);
+          setTimeout(() => {
+            db.collection("leagues").doc(id).update(leagueValues).then(function(){
+              console.log("Document successfully updated");
+              console.log("Item updated:"+newValues);
+            }).catch(function(error){
+              console.error("error removing document: ",error);
+            });
+          }, 1000);
           
-          alert(code + " ~ Was this your card?");
-          if(invCode != code){
-            console.log(invCode);
-          }
-          console.log(code);
+
         });
       }).catch(function(error){
 
@@ -101,6 +132,41 @@ export class LeagueService {
 
       //alert(whichLeague + " ~ Was this your card?");
   }
+
+
+  initLeague(newValues) {
+    console.log(newValues.invCode);
+    var self=this;
+    var db=firebase.firestore();
+      db.collection("leagues").where("invCode","==",newValues.invCode).get().then(function(querySnapshot){
+        querySnapshot.forEach(function(doc){
+          var id=doc.id;
+          let rosterslist:Array<any>=[];
+
+          rosterslist.push({
+            'rosterid':newValues.rid,
+            'teamName':newValues.Team,
+            'uid':firebase.auth().currentUser.uid,
+          });
+          let leagueValues={
+            invCode:newValues.invCode,
+            rosters:rosterslist
+          };
+
+          db.collection("leagues").doc(id).update(leagueValues).then(function(){
+            console.log("Document successfully updated");
+            console.log("Item updated:"+newValues);
+          }).catch(function(error){
+            console.error("error removing document: ",error);
+          });
+
+        });
+      }).catch(function(error){
+
+        //console.log("There is no league with that Invitation Code: " + error);
+      });
+  }
+
 
   getItems(){
     //var self=this;
@@ -135,4 +201,16 @@ export class LeagueService {
     return LeagueObservable;
   }
 
+}
+export const snapshotToArray = snapshot => {
+  let returnArr = [];
+
+  snapshot.forEach(childSnapshot => {
+      let item = childSnapshot.val();
+      item.id = childSnapshot.key;
+      // console.log(item);
+      returnArr.push(item);
+  });
+
+  return returnArr;
 }
