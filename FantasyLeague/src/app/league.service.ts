@@ -64,6 +64,24 @@ export class LeagueService {
             console.log("errors");
           });
   }
+  refresh(){
+    var self=this;
+   //load products from db
+       this.db.collection("leagues")
+       .onSnapshot(function(querySnapshot) {
+            self.leagues = [];
+            querySnapshot.forEach(function(doc) {
+                var league = doc.data();
+                // console.log(doc.id)
+                self.leagues.push({Title:league.Title, invCode: league.invCode, pool:league.pool,
+                  rosters:league.rosters})
+            });
+             self.publishEvent({
+                foo: 'bar'
+            });
+            console.log("leagues loaded");
+        } );
+  }
 
 
   createLeague(title,roster, randId){
@@ -121,6 +139,7 @@ export class LeagueService {
             db.collection("leagues").doc(id).update(leagueValues).then(function(){
               console.log("Document successfully updated");
               console.log("Item updated:"+newValues);
+              self.refresh();
             }).catch(function(error){
               console.error("error removing document: ",error);
             });
@@ -159,6 +178,7 @@ export class LeagueService {
           db.collection("leagues").doc(id).update(leagueValues).then(function(){
             console.log("Document successfully updated");
             console.log("Item updated:"+newValues);
+            self.refresh();
           }).catch(function(error){
             console.error("error removing document: ",error);
           });
