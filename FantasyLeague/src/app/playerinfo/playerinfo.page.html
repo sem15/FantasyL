@@ -3,10 +3,20 @@
     <ion-button slot="start" (click)="goBack()" fill="clear">
      <ion-icon name="arrow-back" color="dark"></ion-icon>
    </ion-button>
-    <ion-title>playerinfo</ion-title>
+    <ion-title>Player Info</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+  <ion-item>
+    <ion-label>
+      IGN:{{currentplayer.IGN}}
+      Name:{{currentplayer.Name}}
+      Points:{{currentplayer.Points}}
+      Position:{{currentplayer.Position}}
+      Team:{{currentplayer.Team}}
+    </ion-label>
+  </ion-item>
 
 </ion-content>
