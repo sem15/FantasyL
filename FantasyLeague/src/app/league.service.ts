@@ -16,6 +16,7 @@ export class LeagueService {
   private eventSubject=new Subject<any>();
   db=firebase.firestore();
   leagues:Array<any>=[];
+  testarr:Array<any>=[];
   rosterName:any;
 
 
@@ -44,6 +45,22 @@ export class LeagueService {
             });
             console.log("leagues loaded");
         } );
+
+//
+        this.db.collection("leagues").get().then(function(querySnapshot){
+          querySnapshot.forEach(function(doc) {
+            //console.log(doc.id);
+            var invCode = doc.data();
+            self.testarr.push(doc.data());
+            
+            //test = doc.id;
+    
+    
+          });
+        }).catch(function(error) {
+            alert(error.message);
+            console.log("errors");
+          });
   }
 
 
@@ -70,6 +87,8 @@ export class LeagueService {
         .catch(function(error) {
             console.error("Error adding document: ", error);
         });
+
+        db.collection("Users").id;
 
 
     }
@@ -150,18 +169,39 @@ export class LeagueService {
   }
 
 
-  getItems(){
-      return this.leagues;
+  getLeagues(){
+    //var self=this;
+    var allLeagues = this.testarr;
+    console.log(allLeagues);
+    //var size = 0;
+    //console.log(this.testarr);
+
+      /*for (let i = 0; i < self.testarr.length; i++) {
+        console.log(self.testarr[i]);
+      }
+      //console.log(test);
+
+    /*this.db.collection('leagues').get().then(snap => {
+      size = snap.size // will return the collection size
+      for (let i = 0; i < size; i++) {
+        leagues.push(this.db.collection('leagues').get().
+      }
+    });
+    */
+    //alert(size);
+    //  leagues = this.db.collection("leagues")
+      return allLeagues;
+  
   }
 
-  getLeagues():any{
+  /*getLeagues():any{
     var LeagueObservable = new Observable(observer => {
       setTimeout(() => {
           observer.next(this.leagues);
       }, 1000);
     });
     return LeagueObservable;
-  }
+  }*/
 
 }
 export const snapshotToArray = snapshot => {
