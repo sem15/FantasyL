@@ -51,7 +51,7 @@ export class LeagueService {
           querySnapshot.forEach(function(doc) {
             //console.log(doc.id);
             var invCode = doc.data();
-            self.testarr.push(invCode.invCode);
+            self.testarr.push(doc.data());
             
             //test = doc.id;
     
@@ -87,6 +87,8 @@ export class LeagueService {
         .catch(function(error) {
             console.error("Error adding document: ", error);
         });
+
+        db.collection("Users").id;
 
 
     }
@@ -168,11 +170,12 @@ export class LeagueService {
   }
 
 
-  getItems(){
+  getLeagues(){
     //var self=this;
-    var test;
+    var allLeagues = this.testarr;
+    console.log(allLeagues);
     //var size = 0;
-    console.log(this.testarr);
+    //console.log(this.testarr);
 
       /*for (let i = 0; i < self.testarr.length; i++) {
         console.log(self.testarr[i]);
@@ -188,18 +191,18 @@ export class LeagueService {
     */
     //alert(size);
     //  leagues = this.db.collection("leagues")
-      return this.testarr;
+      return allLeagues;
   
   }
 
-  getLeagues():any{
+  /*getLeagues():any{
     var LeagueObservable = new Observable(observer => {
       setTimeout(() => {
           observer.next(this.leagues);
       }, 1000);
     });
     return LeagueObservable;
-  }
+  }*/
 
 }
 export const snapshotToArray = snapshot => {

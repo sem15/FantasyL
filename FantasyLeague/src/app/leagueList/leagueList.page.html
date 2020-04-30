@@ -15,7 +15,9 @@
    <ion-item *ngFor="let league of myleagues" (click)="goToLeagueOverview(league)">
     
     <ion-label>
-      {{ league.Title }}  &nbsp; &nbsp; {{ league.invCode }}
+      Title: {{ league.Title }}  &nbsp; &nbsp; 
+      <br>
+      Invite Code: {{ league.invCode }}
     </ion-label>
 
  </ion-item>
