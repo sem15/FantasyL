@@ -79,7 +79,10 @@ export class leagueListPage implements OnInit{
   }
 
   goToLeagueOverview(league){
-    this.router.navigate(["./tabs/leagueOverview", league]);
+    
+    this.leagueService.myrosters = league;
+    console.log(league);
+    this.router.navigate(["./tabs/leagueOverview"]);
   }
 
   verifyCode(){
