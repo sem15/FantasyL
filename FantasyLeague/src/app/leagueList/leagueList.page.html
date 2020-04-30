@@ -12,12 +12,12 @@
 <ion-content [fullscreen]="true">
 <ion-list>
   
-   <ion-item *ngFor="let league of leagues" (click)="goToLeagueOverview(league)">
+   <ion-item *ngFor="let league of myleagues" (click)="goToLeagueOverview(league)">
     
     <ion-label>
-      {{ league.Title }}  &nbsp; &nbsp; {{ league.region }}
+      Title: {{ league.Title }}  &nbsp; &nbsp; 
       <br>
-      Owner: {{ league.owner }}
+      Invite Code: {{ league.invCode }}
     </ion-label>
 
  </ion-item>

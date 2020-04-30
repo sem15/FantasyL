@@ -76,4 +76,13 @@ export class CreateleaguePage implements OnInit {
     this.router.navigate(['./tabs/leagueList']);
   }
 
+  doRefresh(event) {
+    console.log('Begin async operation');
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+    }, 2000);
+  }
+
 }
