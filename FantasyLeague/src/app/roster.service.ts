@@ -16,7 +16,8 @@ export class RosterService {
   db=firebase.firestore();
   players:any;
   roster:Array<any>=[];
-  rosters_template:Array<any>=[];
+  rosters_template:Array<any>=[
+  ];
 
 
   //event notification
