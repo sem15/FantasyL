@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router,ActivatedRoute} from '@angular/router';
 import {RosterService} from '../roster.service';
 import * as firebase from 'firebase';
+import {PlayerService} from '../player.service';
 
 @Component({
   selector: 'app-roster-overview',
