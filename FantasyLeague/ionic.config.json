@@ -1,5 +1,8 @@
 {
   "name": "FantasyLeague",
-  "integrations": {},
+  "integrations": {
+    "cordova": {},
+    "capacitor": {}
+  },
   "type": "angular"
 }
