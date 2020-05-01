@@ -57,7 +57,7 @@ getObservable(): Subject<any> {
   }
 
   sendToRoster(ign1, ign2, ign3, ign4, ign5) {
-    
+
   }
 
 }

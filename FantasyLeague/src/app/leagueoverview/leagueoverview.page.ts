@@ -19,9 +19,9 @@ export class LeagueoverviewPage implements OnInit {
     private rosterService: RosterService,
     private leagueService: LeagueService
   ) {
-      
-   
-    
+
+
+
     this.leagueService.getObservable().subscribe((data)=>
     {
       //this.rosters = this.leagueService.myrosters;
@@ -36,7 +36,7 @@ export class LeagueoverviewPage implements OnInit {
     //console.log(this.roster);
    }
   ngOnInit() {
-    
+
     //this.myrosters = this.leagueService.myrosters;
     this.rosters = this.leagueService.myrosters.rosters;
     console.log(this.rosters);
