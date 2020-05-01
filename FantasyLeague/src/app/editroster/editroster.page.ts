@@ -31,25 +31,26 @@ export class EditrosterPage implements OnInit {
       this.current_player = param;
       console.log(this.current_player);
       console.log(this.rosterService.param);
-      this.edit_item_form.patchValue({Team:this.rosterService.param.Team});
+      this.edit_item_form.patchValue({Team:this.rosterService.param.teamName});
       this.edit_item_form.patchValue({Status:this.current_player.Status});
 
   })
 }
 
+
 updateStatus(value){
 let playerlist=this.rosterService.players;
 console.log(playerlist);
-let index=playerlist.map(function(e){
-  return e.pid;
-}).indexOf(this.current_player.IGN);
-console.log("index:"+index);
-if(index!=-1)
-{
-  console.log(playerlist);
-  console.log(playerlist.Status);
-  playerlist[index].Status=value.Status;
-}
+// let index=playerlist.map(function(e){
+//   return e.pid;
+// }).indexOf(this.current_player.IGN);
+// console.log("index:"+index);
+// if(index!=-1)
+// {
+//   console.log(playerlist);
+//   console.log(playerlist.Status);
+//   playerlist[index].Status=value.Status;
+// }
   let newValues = {
     id:this.rosterService.id,
     Team:value.Team,
