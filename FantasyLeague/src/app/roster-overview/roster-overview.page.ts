@@ -51,6 +51,10 @@ export class RosterOverviewPage implements OnInit {
     this.router.navigate(["/tabs/playerInfo",player]);
   }
 
+  goBack(){
+    this.router.navigate(['./tabs/leagueOverview']);
+  }
+
   updateStatus(players){
     this.rosterService.id=this.currentroster.rosterid;
     this.rosterService.players=players;
