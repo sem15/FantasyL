@@ -58,25 +58,6 @@ getObservable(): Subject<any> {
 
   }
 
-  updatePlayers() {
-    var self=this;
-
-    this.db.collection("players").where("id", "==", "j0Et3WoohXWTyRp54wP3")
-     .onSnapshot(function(querySnapshot) {
-           self.playerlist = [];
-           querySnapshot.forEach(function(doc) {
-               var player = doc.data();
-               self.playerlist.push({id:player.id,playerslist:player.playerlist})
-           });
-
-           self.publishEvent({
-               foo: 'bar'
-           });
-
-           console.log("items reloaded");
-       });
-  }
-
 }
 
 
