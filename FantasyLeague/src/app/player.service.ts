@@ -12,7 +12,7 @@ export class PlayerService {
   param:any
   private eventSubject=new Subject<any>();
   playerlist:Array<any>=[];
-  list:any;
+  list:Array<any>=[];
   db=firebase.firestore();
 
   //event notification
@@ -34,9 +34,10 @@ getObservable(): Subject<any> {
              querySnapshot.forEach(function(doc) {
 
                  var player = doc.data();
-                 self.playerlist.push({id:player.id,playerslist:player.playersList})
+                 self.playerlist.push({id:player.id,playersList:player.playersList})
                  self.list=player.playersList;
-
+                 console.log("self.list");
+                 console.log(self.list);
              });
 
              self.publishEvent({
@@ -57,7 +58,7 @@ getObservable(): Subject<any> {
   }
 
   sendToRoster(ign1, ign2, ign3, ign4, ign5) {
-    
+
   }
 
 }

@@ -19,7 +19,7 @@ export class DraftlobbyPage implements OnInit {
   jngList:Array<any>=[];
   botList:Array<any>=[];
   supList:Array<any>=[];
-  playersList:Array<any>=[];
+  playersList:any;
   playerinfo:Array<any>=[];
 
 
@@ -31,6 +31,12 @@ export class DraftlobbyPage implements OnInit {
     private playerService:PlayerService
   ) {
     this.playersList=this.playerService.list;
+    this.playerService.getObservable().subscribe((data)=>{
+      this.playersList=this.playerService.list;
+      console.log("constructor playerlist");
+      console.log(this.playersList);
+      console.log(this.playerService.list);
+    });
     //for (let i = 0; i < this.playersList.length; i++) {
       //if(this.playersList[i].Position == "Top") {
         //this.topList.push(this.playersList[i]);
@@ -52,6 +58,7 @@ export class DraftlobbyPage implements OnInit {
   }
 
 draftForm(value) {
+  console.log("playerslist:");
   console.log(this.playersList);
   var db=firebase.firestore();
   console.log(this.playersList[0].IGN);
@@ -64,7 +71,8 @@ draftForm(value) {
         'IGN':this.playersList[i].IGN,
         'Name':this.playersList[i].Name,
         'Position':this.playersList[i].Position,
-        'Points':this.playersList[i].points,
+        'Points':this.playersList[i].Points,
+        'img':this.playersList[i].img,
         'Status':'Active'
       });
     }
@@ -74,7 +82,8 @@ draftForm(value) {
         'IGN':this.playersList[i].IGN,
         'Name':this.playersList[i].Name,
         'Position':this.playersList[i].Position,
-        'Points':this.playersList[i].points,
+        'Points':this.playersList[i].Points,
+        'img':this.playersList[i].img,
         'Status':'Active'
       });
     }
@@ -84,7 +93,8 @@ draftForm(value) {
         'IGN':this.playersList[i].IGN,
         'Name':this.playersList[i].Name,
         'Position':this.playersList[i].Position,
-        'Points':this.playersList[i].points,
+        'Points':this.playersList[i].Points,
+        'img':this.playersList[i].img,
         'Status':'Active'
       });
     }
@@ -94,7 +104,8 @@ draftForm(value) {
         'IGN':this.playersList[i].IGN,
         'Name':this.playersList[i].Name,
         'Position':this.playersList[i].Position,
-        'Points':this.playersList[i].points,
+        'Points':this.playersList[i].Points,
+        'img':this.playersList[i].img,
         'Status':'Active'
       });
     }
@@ -104,13 +115,14 @@ draftForm(value) {
         'IGN':this.playersList[i].IGN,
         'Name':this.playersList[i].Name,
         'Position':this.playersList[i].Position,
-        'Points':this.playersList[i].points,
+        'Points':this.playersList[i].Points,
+        'img':this.playersList[i].img,
         'Status':'Active'
       });
     }
   }
   console.log("fill roster");
-  console.log(this.playerinfo);
+  console.log(this.playerinfo[0]);
     this.rosterService.fillRoster(this.playerinfo);
     this.goBack();
   //setTimeout(() => {
