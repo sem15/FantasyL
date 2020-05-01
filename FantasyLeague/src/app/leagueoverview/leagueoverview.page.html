@@ -3,16 +3,16 @@
     <ion-button slot="start" (click)="goBack()" fill="clear">
      <ion-icon name="arrow-back" color="dark"></ion-icon>
     </ion-button>
-    <ion-title>leagueoverview</ion-title>
+    <ion-title>League Overview</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let roster of rosters" (click)="goToRoster(roster)"> 
+    <ion-item *ngFor="let roster of rosters" (click)="goToRoster(roster)">
     <ion-label class=ion-text-wrap>
-      Team:{{roster.teamName}}
-      
+      Team: {{roster.teamName}}
+
     </ion-label>
     </ion-item>
   </ion-list>

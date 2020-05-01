@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router,ActivatedRoute} from '@angular/router';
 import {RosterService} from '../roster.service';
 import * as firebase from 'firebase';
+import {PlayerService} from '../player.service';
 
 @Component({
   selector: 'app-roster-overview',
@@ -17,6 +18,7 @@ export class RosterOverviewPage implements OnInit {
   constructor(
     private router: Router,
     private rosterService: RosterService,
+    private playerService: PlayerService,
     private route: ActivatedRoute
   ) {
     var self=this;
@@ -49,6 +51,10 @@ export class RosterOverviewPage implements OnInit {
     this.rosterService.info=player;
     console.log(player);
     this.router.navigate(["/tabs/playerInfo",player]);
+  }
+
+  goBack(){
+    this.router.navigate(['./tabs/leagueOverview']);
   }
 
   updateStatus(players){

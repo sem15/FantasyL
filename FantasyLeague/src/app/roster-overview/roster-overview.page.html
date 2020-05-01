@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Roster Overview</ion-title>
+    <ion-button slot="start" (click)="goBack()" fill="clear">
+     <ion-icon name="arrow-back" color="dark"></ion-icon>
+    </ion-button>
+    <ion-title>{{currentroster.teamName}}</ion-title>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -10,21 +13,27 @@
 <ion-content>
 
   <ion-list>
+    <ion-item-group>
     <ion-item *ngFor="let player of playerlist.players" (click)="goToPlayer(player)">
-      <ion-label>
-        IGN: {{player.IGN}}
-        Name: {{player.Name}}
+      <ion-thumbnail slot="end">
+      <ion-img [src]="player.img"></ion-img>
+      </ion-thumbnail>
+    <ion-item-group>
+      <ion-item-divider>
+        <ion-label>
         Position: {{player.Position}}
-        Status: {{player.Status}}
+        </ion-label>
+      </ion-item-divider>
+        <ion-label>
+        <ion-item>
+        IGN: {{player.IGN}}
+        </ion-item>
+        <ion-item>
         Points: {{player.Points}}
-        Team: {{player.Team}}
-      </ion-label>
+       </ion-item>
+       </ion-label>
+    </ion-item-group>
     </ion-item>
+    </ion-item-group>
   </ion-list>
-  <ion-item>
-  <ion-label>
-    Team Name:{{currentroster.teamName}}
-  </ion-label>
-</ion-item>
-  
 </ion-content>
