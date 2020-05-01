@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router,ActivatedRoute } from '@angular/router';
-import {PlayerService} from'../player.service';
+import {RosterService} from'../roster.service';
 
 
 @Component({
@@ -13,15 +13,21 @@ currentplayer:any;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private playerService:PlayerService) { }
+    private rosterService:RosterService) { }
 
   ngOnInit() {
-    this.currentplayer=this.playerService.param;
+    this.currentplayer=this.rosterService.info;
     console.log(this.currentplayer);
+    this.route.params.subscribe(
+      param=>{
+        this.currentplayer=param;
+        console.log(this.currentplayer);
+      }
+    )
   }
 
   goBack(){
-    this.router.navigate(['./tabs/draftLobby']);
+    this.router.navigate(['./tabs/roster-overview']);
   }
 
 }
