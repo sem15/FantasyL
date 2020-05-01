@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {RosterService} from '../roster.service';
 import {LeagueService} from'../league.service';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-leagueoverview',
@@ -18,9 +19,9 @@ export class LeagueoverviewPage implements OnInit {
     private rosterService: RosterService,
     private leagueService: LeagueService
   ) {
-      
-   
-    
+
+
+
     this.leagueService.getObservable().subscribe((data)=>
     {
       //this.rosters = this.leagueService.myrosters;
@@ -35,7 +36,7 @@ export class LeagueoverviewPage implements OnInit {
     //console.log(this.roster);
    }
   ngOnInit() {
-    
+
     //this.myrosters = this.leagueService.myrosters;
     this.rosters = this.leagueService.myrosters.rosters;
     console.log(this.rosters);
@@ -52,10 +53,28 @@ export class LeagueoverviewPage implements OnInit {
   }
 
   goToRoster(rost){
+    var self =this;
     console.log(rost);
     this.rosterService.param=rost;
     console.log(this.rosterService.param);
-  	this.router.navigate(["/roster-overview"]);
+    var db=firebase.firestore();
+    db.collection("roster").where("id","==",this.rosterService.param.rosterid)
+    .onSnapshot(function(querySnapshot){
+      self.rosterService.playerlist=[];
+      querySnapshot.forEach(function(doc){
+        var list=doc.data();
+        self.rosterService.playerlist={
+        Team:list.Team,
+        players:list.players
+        };
+        console.log("players in a roster");
+        console.log(self.rosterService.playerlist);
+
+      });
+    });
+    setTimeout(() => {
+      this.router.navigate(["/roster-overview"]);
+    }, 2000);
 
   }
 

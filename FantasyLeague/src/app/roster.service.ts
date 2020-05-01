@@ -15,9 +15,11 @@ export class RosterService {
   private eventSubject=new Subject<any>();
   db=firebase.firestore();
   players:any;
+  info:any;
   roster:Array<any>=[];
   rosters_template:Array<any>=[
   ];
+  playerlist:any;
 
 
   //event notification
@@ -50,6 +52,7 @@ getObservable(): Subject<any> {
 
              console.log("items reloaded");
          } );
+
       }
     }
 
