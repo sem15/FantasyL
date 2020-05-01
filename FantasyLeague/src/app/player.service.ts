@@ -32,6 +32,7 @@ getObservable(): Subject<any> {
        .onSnapshot(function(querySnapshot) {
              self.playerlist = [];
              querySnapshot.forEach(function(doc) {
+
                  var player = doc.data();
                  self.playerlist.push({id:player.id,playersList:player.playersList})
                  self.list=player.playersList;
