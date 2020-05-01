@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {RosterService} from '../roster.service';
 import {LeagueService} from'../league.service';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-leagueoverview',
@@ -52,10 +53,28 @@ export class LeagueoverviewPage implements OnInit {
   }
 
   goToRoster(rost){
+    var self =this;
     console.log(rost);
     this.rosterService.param=rost;
     console.log(this.rosterService.param);
-  	this.router.navigate(["/roster-overview"]);
+    var db=firebase.firestore();
+    db.collection("roster").where("id","==",this.rosterService.param.rosterid)
+    .onSnapshot(function(querySnapshot){
+      self.rosterService.playerlist=[];
+      querySnapshot.forEach(function(doc){
+        var list=doc.data();
+        self.rosterService.playerlist={
+        Team:list.Team,
+        players:list.players
+        };
+        console.log("players in a roster");
+        console.log(self.rosterService.playerlist);
+
+      });
+    });
+    setTimeout(() => {
+      this.router.navigate(["/roster-overview"]);
+    }, 2000);
 
   }
 
